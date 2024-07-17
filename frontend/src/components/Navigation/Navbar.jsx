@@ -25,7 +25,7 @@ const NavBar = () => {
 
   return (
     <AppBar position="static">
-        <Box>
+        {/* <Box>
           {isAuthenticated ? (
             <Button color="inherit" onClick={logout}>
               Выйти
@@ -33,7 +33,7 @@ const NavBar = () => {
           ) : (
             <ColorButton onClick={() => navigate("/login")}>Войти</ColorButton>
           )}
-        </Box>
+        </Box> */}
       {isSmallScreen ? (
         <CombinedNavbar />
       ) : (

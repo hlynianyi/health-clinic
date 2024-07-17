@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -17,6 +16,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { green, grey } from "@mui/material/colors";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
+import navbarLogo from "../../assets/logo3.webp";
 // import { useAuth } from "../../context/AuthContext";
 
 const whiteGrey = grey["A100"];
@@ -90,14 +90,12 @@ const CombinedNavbar = () => {
         }}
       >
         <Box display="flex" alignItems="center">
-          <Typography
-            noWrap
-            alignContent="center"
-            variant="h6"
-            component="span"
-          >
-            Logo
-          </Typography>
+          <Box
+            component="img"
+            src={navbarLogo}
+            alt="Clinic Logo"
+            sx={{ height: 50, backgroundColor: "transparent" }}
+          />
         </Box>
         <Box display="flex" alignItems="center" gap={2}>
           <Box display="flex" alignItems="center">

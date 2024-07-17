@@ -1,21 +1,31 @@
 import React from "react";
-import { useAuth } from "../context/AuthContext";
-import { Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { Button, Typography } from "@mui/material";
 
 const Dashboard = () => {
-  const { logout } = useAuth();
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("isAuthenticated");
+    navigate("/admin-login");
+  };
 
   return (
     <div>
-      <Typography variant="h4">Панель управления</Typography>
-      <Button variant="contained" onClick={() => navigate("/register-doctor")}>
-        Зарегистрировать врача
-      </Button>
-      <Button variant="contained" color="secondary" onClick={logout}>
-        Выйти
-      </Button>
+      <Typography className="py-6 px-6" variant="h4">
+        Панель управления
+      </Typography>
+      <div className="px-6 flex flex-row justify-between">
+        <Button
+          variant="contained"
+          onClick={() => navigate("/register-doctor")}
+        >
+          Зарегистрировать врача
+        </Button>
+        <Button variant="contained" color="secondary" onClick={handleLogout}>
+          Выйти
+        </Button>
+      </div>
     </div>
   );
 };
