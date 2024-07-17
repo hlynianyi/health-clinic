@@ -36,7 +36,7 @@ const RegisterDoctor = () => {
     formData.append("experience", experience);
     formData.append("about", about);
     formData.append("photo", photo);
-
+    
     try {
       await axios.post("http://localhost:5000/api/doctors/register", formData, {
         headers: {

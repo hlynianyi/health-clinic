@@ -8,6 +8,7 @@ import {
   ListItem,
   ListItemText,
   Avatar,
+  Grid
 } from "@mui/material";
 
 const Doctors = () => {
@@ -37,15 +38,48 @@ const Doctors = () => {
       </Typography>
       <List>
         {doctors.map((doctor) => (
-          <ListItem key={doctor._id}>
-            <Avatar
-              src={`http://localhost:5000/${doctor.photo}`}
-              alt={doctor.name}
-            />
-            <ListItemText
-              primary={`${doctor.name} - ${doctor.specialty}`}
-              secondary={`Email: ${doctor.email} | Опыт работы: ${doctor.experience} лет | О специалисте: ${doctor.about}`}
-            />
+          <ListItem key={doctor._id} alignItems="flex-start">
+            <Grid container spacing={2}>
+              <Grid item>
+                <Avatar
+                  src={`http://localhost:5000/api/doctors/photo/${doctor.photo}`} // Обновленный URL для фотографии
+                  alt={doctor.name}
+                  sx={{ width: 100, height: 100 }}
+                />
+              </Grid>
+              <Grid item xs>
+                <ListItemText
+                  primary={`${doctor.name} - ${doctor.specialty}`}
+                  secondary={
+                    <>
+                      <Typography
+                        component="span"
+                        variant="body2"
+                        color="textPrimary"
+                      >
+                        Email: {doctor.email}
+                      </Typography>
+                      <br />
+                      <Typography
+                        component="span"
+                        variant="body2"
+                        color="textPrimary"
+                      >
+                        Опыт работы: {doctor.experience} лет
+                      </Typography>
+                      <br />
+                      <Typography
+                        component="span"
+                        variant="body2"
+                        color="textPrimary"
+                      >
+                        О специалисте: {doctor.about}
+                      </Typography>
+                    </>
+                  }
+                />
+              </Grid>
+            </Grid>
           </ListItem>
         ))}
       </List>
