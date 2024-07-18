@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
-  const [credentials, setCredentials] = useState({ username: '', password: '' });
+  const [credentials, setCredentials] = useState({
+    username: "",
+    password: "",
+  });
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -17,34 +20,48 @@ const AdminLogin = () => {
     const adminUsername = process.env.REACT_APP_ADMIN_USERNAME;
     const adminPassword = process.env.REACT_APP_ADMIN_PASSWORD;
 
-    if (credentials.username === adminUsername && credentials.password === adminPassword) {
-      sessionStorage.setItem('isAuthenticated', 'true');
-      navigate('/dashboard');
+    if (
+      credentials.username === adminUsername &&
+      credentials.password === adminPassword
+    ) {
+      sessionStorage.setItem("isAuthenticated", "true");
+      navigate("/dashboard");
     } else {
-      alert('Invalid credentials');
+      alert("Invalid credentials");
     }
   };
 
   return (
-    <div>
-      <h1>Admin Login</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="username"
-          value={credentials.username}
-          onChange={handleChange}
-          placeholder="Username"
-        />
-        <input
-          type="password"
-          name="password"
-          value={credentials.password}
-          onChange={handleChange}
-          placeholder="Password"
-        />
-        <button type="submit">Login</button>
-      </form>
+    <div className="flex grow items-center justify-center border-2">
+      <div className="container mx-auto mt-6 grow">
+        <h1 className="flex justify-center text-lg">Администратор?</h1>
+        <div className="flex justify-center">
+          <form className="flex flex-col gap-4 mt-6" onSubmit={handleSubmit}>
+            <input
+              className="p-2 border-2 rounded border-sky-700"
+              type="text"
+              name="username"
+              value={credentials.username}
+              onChange={handleChange}
+              placeholder="Логин"
+            />
+            <input
+              className="p-2 border-2 rounded border-sky-700"
+              type="password"
+              name="password"
+              value={credentials.password}
+              onChange={handleChange}
+              placeholder="Пароль"
+            />
+            <button
+              className="p-2 border-2 rounded border-sky-700"
+              type="submit"
+            >
+              Войти
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

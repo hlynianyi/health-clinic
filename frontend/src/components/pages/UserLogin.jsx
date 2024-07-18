@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { login } from "../store/authSlice";
+import { login } from "../../store/authSlice";
 
 const LoginPage = () => {
   const [credentials, setCredentials] = useState({
@@ -22,10 +22,14 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
+    <div className="flex grow flex-col justify-center items-center gap-6">
       <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
+      <form
+        className="px-4 py-12 flex flex-col gap-4 justify-center border-2 border-black rounded-lg"
+        onSubmit={handleSubmit}
+      >
         <input
+          className="flex flex-col gap-4 justify-center border-2 border-black rounded-lg"
           type="text"
           name="username"
           value={credentials.username}
@@ -33,13 +37,19 @@ const LoginPage = () => {
           placeholder="Username"
         />
         <input
+          className="flex flex-col gap-4 justify-center border-2 border-black rounded-lg"
           type="password"
           name="password"
           value={credentials.password}
           onChange={handleChange}
           placeholder="Password"
         />
-        <button type="submit">Login</button>
+        <button
+          className="flex justify-center border-2 border-black rounded-lg"
+          type="submit"
+        >
+          Login
+        </button>
       </form>
     </div>
   );

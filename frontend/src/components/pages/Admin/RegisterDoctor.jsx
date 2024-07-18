@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { fetchDoctors } from "../store/doctorSlice";
+import { fetchDoctors } from "../../../store/doctorSlice";
 import {
   Typography,
   Box,
@@ -36,7 +36,7 @@ const RegisterDoctor = () => {
     formData.append("experience", experience);
     formData.append("about", about);
     formData.append("photo", photo);
-    
+
     try {
       await axios.post("http://localhost:5000/api/doctors/register", formData, {
         headers: {
@@ -44,7 +44,7 @@ const RegisterDoctor = () => {
         },
       });
       dispatch(fetchDoctors());
-      // Очистка полей после успешной отправки данных
+
       setLogin("");
       setPassword("");
       setName("");
@@ -60,7 +60,7 @@ const RegisterDoctor = () => {
 
   return (
     <Box
-      className="p-6"
+      className="p-6 flex grow flex-col"
       component="form"
       sx={{
         "& .MuiTextField-root": { my: 1, mr: 1, width: "25ch" },

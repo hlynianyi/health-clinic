@@ -6,21 +6,21 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { createTheme, styled } from "@mui/material/styles";
-import PhoneIcon from "@mui/icons-material/CallEnd";
+import PhoneIcon from "@mui/icons-material/PhoneIphoneRounded";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import { orange, grey, blue } from "@mui/material/colors";
 import { ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
 import navbarLogo from "../../assets/logo3.webp";
 
 const whiteGrey = grey["A100"];
 const navbarBlue = blue["A200"];
 
 const ColorButton = styled(Button)(({ theme }) => ({
+  height: 45,
   color: whiteGrey,
-  backgroundColor: theme.palette.warning.light,
+  backgroundColor: "#28926E",
   "&:hover": {
-    backgroundColor: theme.palette.warning.main,
+    backgroundColor: "#1976D2",
   },
   fontSize: 14,
 }));
@@ -41,32 +41,25 @@ const NavbarUpper = () => {
             component="img"
             src={navbarLogo}
             alt="Clinic Logo"
-            sx={{ height: 35, backgroundColor: "transparent" }}
+            sx={{ height: 45, backgroundColor: "transparent" }}
           />
           <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Typography
-              alignContent="center"
-              variant="h5"
-              component="span"
-              color={navbarBlue}
-            >
-              MEDICARE
-            </Typography>
+            <div className="flex flex-col nowrap font-normal font-montserrat text-mainblue">
+              <p>Медицинский центр</p>
+              <p>на Демидова</p>
+            </div>
           </ThemeProvider>
         </Box>
         <Grid ml={2} container alignItems="center" sx={{ width: "auto" }}>
-          <Grid item mr={1}>
-            <PhoneIcon fontSize="large" />
+          <Grid item mr={0}>
+            <PhoneIcon fontSize="large" style={{ color: "#B8BAB9" }} />
           </Grid>
           <Grid item>
-            <Box ml={1}>
-              <Typography variant="subtitle2">
+            <Box ml={0}>
+              <p className="font-light font-montserrat text-gray-100 text-xs">
                 Круглосуточная запись по телефону:
-              </Typography>
-              <Typography variant="h7" fontWeight="bold">
-                +7 (495) 187-88-36
-              </Typography>
+              </p>
+              <p className="flex justify-start">+7 (495) 187-88-36</p>
             </Box>
           </Grid>
           <Grid item ml={2}>

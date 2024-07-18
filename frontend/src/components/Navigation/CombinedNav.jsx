@@ -9,7 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { styled } from "@mui/material/styles";
-import PhoneIcon from "@mui/icons-material/PhoneIphoneOutlined";
+import PhoneIcon from "@mui/icons-material/PhoneIphoneRounded";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import HomeIcon from "@mui/icons-material/Home";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -25,7 +25,7 @@ const MENU = [
   { label: "Врачи", path: "/doctors" },
   { label: "Услуги", path: "/services" },
   { label: "Диагностика", path: "/diagnostics" },
-  { label: "Анализы", path: "/tests" },
+  // { label: "Анализы", path: "/tests" },
   { label: "Акции", path: "/promotions" },
   { label: "Пациентам", path: "/patients" },
   { label: "Отзывы", path: "/reviews" },
@@ -33,22 +33,13 @@ const MENU = [
 ];
 
 const ColorButton = styled(Button)(({ theme }) => ({
+  height: 45,
   color: whiteGrey,
-  backgroundColor: theme.palette.warning.light,
+  backgroundColor: "#28926E",
   "&:hover": {
-    backgroundColor: theme.palette.warning.main,
+    backgroundColor: "#1976D2",
   },
   fontSize: 14,
-}));
-
-const NavbarButton = styled(Button)(({ theme }) => ({
-  color: "inherit",
-  "&:hover": {
-    backgroundColor: green[100],
-  },
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
 }));
 
 const HomeButton = styled(IconButton)(({ theme }) => ({
@@ -94,19 +85,24 @@ const CombinedNavbar = () => {
             component="img"
             src={navbarLogo}
             alt="Clinic Logo"
-            sx={{ height: 50, backgroundColor: "transparent" }}
+            sx={{ height: 45, backgroundColor: "transparent" }}
           />
         </Box>
         <Box display="flex" alignItems="center" gap={2}>
-          <Box display="flex" alignItems="center">
-            <PhoneIcon fontSize="small" />
-            <Typography variant="subtitle2" fontWeight="">
-              +7 (495) 187-88-36
-            </Typography>
-          </Box>
-          <ColorButton startIcon={<AssignmentIcon />} variant="">
-            {isSmallScreen ? <p>Записаться</p> : <p>Записаться онлайн</p>}
-          </ColorButton>
+          <div className="flex justify-center items-center gap-1">
+            <PhoneIcon fontSize="large" style={{ color: '#B8BAB9'}}/>
+            <div display="flex flex-col">
+              <p className="font-light font-montserrat text-gray-100 text-xs">
+                Круглосуточная запись:
+              </p>
+              <div className="flex flex-row">
+                <p variant="subtitle2" fontWeight="">
+                  +7 (495) 187-88-36
+                </p>
+              </div>
+            </div>
+          </div>
+
           <IconButton>
             <MenuIcon
               id="basic-button"
@@ -139,6 +135,9 @@ const CombinedNavbar = () => {
               </MenuItem>
             ))}
           </Menu>
+          <ColorButton startIcon={<AssignmentIcon />} variant="">
+            {isSmallScreen ? <p>Записаться</p> : <p>Записаться онлайн</p>}
+          </ColorButton>
         </Box>
       </Toolbar>
     </AppBar>

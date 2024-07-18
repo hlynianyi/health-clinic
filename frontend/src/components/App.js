@@ -8,13 +8,20 @@ import {
 import { Provider } from "react-redux";
 import { store } from "../store/store";
 import NavBar from "./Navigation/Navbar";
-import HomePage from "./Home";
-import LoginPage from "./LoginPage";
+import HomePage from "./pages/Home";
+import UserLogin from "./pages/UserLogin";
 import AdminLogin from "./Admin/AdminLogin";
-import Dashboard from "./Dashboard";
-import RegisterDoctor from "./RegisterDoctor";
-import Doctors from "./Doctors"; // Импортируем компонент Doctors
+import Dashboard from "./pages/Admin/Dashboard";
+import RegisterDoctor from "./pages/Admin/RegisterDoctor";
+import Doctors from "./pages/Doctors"; // Импортируем компонент Doctors
 import { AuthProvider, useAuth } from "../context/AuthContext";
+import Footer from "./Footer";
+import Services from "./pages/Services";
+import Diagnostic from "./pages/Diagnostic";
+import Offers from "./pages/Offers";
+import Patients from "./pages/Patients";
+import Reviews from "./pages/Reviews";
+import Contacts from "./pages/Contacts";
 
 const ProtectedRoute = ({ children }) => {
   const isAuthenticated = sessionStorage.getItem("isAuthenticated") === "true";
@@ -34,7 +41,7 @@ const App = () => {
           <NavBar />
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<LoginPage />} />
+            <Route path="/login" element={<UserLogin />} />
             <Route path="/admin" element={<AdminLogin />} />
             <Route
               path="/dashboard"
@@ -52,8 +59,15 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
-            <Route path="/doctors" element={<Doctors />} /> {/* Добавляем маршрут для Doctors */}
+            <Route path="/doctors" element={<Doctors />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/diagnostics" element={<Diagnostic />} />
+            <Route path="/offers" element={<Offers />} />
+            <Route path="/patients" element={<Patients />} />
+            <Route path="/reviews" element={<Reviews />} />
+            <Route path="/contacts" element={<Contacts />} />
           </Routes>
+          <Footer />
         </Router>
       </AuthProvider>
     </Provider>

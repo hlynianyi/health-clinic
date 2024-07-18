@@ -15,7 +15,7 @@ const MENU = [
   { label: "Врачи", path: "/doctors" },
   { label: "Услуги", path: "/services" },
   { label: "Диагностика", path: "/diagnostics" },
-  { label: "Анализы", path: "/tests" },
+  // { label: "Анализы", path: "/tests" },
   { label: "Акции", path: "/promotions" },
   { label: "Пациентам", path: "/patients" },
   { label: "Отзывы", path: "/reviews" },
@@ -25,7 +25,7 @@ const MENU = [
 const NavbarButton = styled(Button)(({ theme }) => ({
   color: "inherit",
   "&:hover": {
-    backgroundColor: green[100],
+    backgroundColor: "#28926E",
   },
   display: "flex",
   alignItems: "center",
@@ -34,7 +34,7 @@ const NavbarButton = styled(Button)(({ theme }) => ({
 const HomeButton = styled(IconButton)(({ theme }) => ({
   color: "inherit",
   "&:hover": {
-    backgroundColor: green[100],
+    backgroundColor: "#28926E",
   },
   display: "flex",
   alignItems: "center",
@@ -53,11 +53,7 @@ const NavbarLower = () => {
   };
 
   return (
-    <AppBar
-      color="transparent"
-      position="static"
-      sx={{ boxShadow: "none",  }}
-    >
+    <AppBar color="transparent" position="static" sx={{ boxShadow: "none" }}>
       <Toolbar
         sx={{
           justifyContent: isSmallScreen ? "space-between" : "center",

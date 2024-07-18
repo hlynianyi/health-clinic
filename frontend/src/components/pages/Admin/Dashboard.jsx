@@ -11,7 +11,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col grow">
       <Typography className="py-6 px-6" variant="h4">
         Панель управления
       </Typography>
