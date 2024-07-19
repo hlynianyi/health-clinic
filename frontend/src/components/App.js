@@ -14,14 +14,14 @@ import AdminLogin from "./Admin/AdminLogin";
 import Dashboard from "./pages/Admin/Dashboard";
 import RegisterDoctor from "./pages/Admin/RegisterDoctor";
 import Doctors from "./pages/Doctors"; // Импортируем компонент Doctors
-import { AuthProvider, useAuth } from "../context/AuthContext";
-import Footer from "./Footer";
+import Footer from "./Navigation/Footer";
 import Services from "./pages/Services";
 import Diagnostic from "./pages/Diagnostic";
 import Offers from "./pages/Offers";
 import Patients from "./pages/Patients";
 import Reviews from "./pages/Reviews";
 import Contacts from "./pages/Contacts";
+import { AuthProvider, useAuth } from "../context/AuthContext";
 
 const ProtectedRoute = ({ children }) => {
   const isAuthenticated = sessionStorage.getItem("isAuthenticated") === "true";

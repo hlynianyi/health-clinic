@@ -8,6 +8,7 @@ import NavbarUpper from "./NavbarUpper";
 import NavbarLower from "./NavbarLower";
 import CombinedNavbar from "./CombinedNav"; // Импортируйте этот компонент
 
+// todo: сделать респонсив без МУИ и мобильный падинг 16пх
 const ColorButton = styled(Button)(({ theme }) => ({
   color: theme.palette.getContrastText(theme.palette.primary.main),
   backgroundColor: theme.palette.primary.main,
@@ -25,7 +26,7 @@ const NavBar = () => {
 
   return (
     <AppBar position="static">
-        {/* <Box>
+      {/* <Box>
           {isAuthenticated ? (
             <Button color="inherit" onClick={logout}>
               Выйти

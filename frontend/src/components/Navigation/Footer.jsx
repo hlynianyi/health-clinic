@@ -1,14 +1,14 @@
 import React from "react";
-import hours from "../assets/hours.webp";
-import tel from "../assets/tel.webp";
-import mail from "../assets/mail.webp";
-import location from "../assets/location.webp";
+import hours from "../../assets/hours.webp";
+import tel from "../../assets/tel.webp";
+import mail from "../../assets/mail.webp";
+import location from "../../assets/location.webp";
 
 // todo: mobile responsive version
 
 const Footer = () => {
   return (
-    <footer className="px-6 py-6 gap-4 flex flex-row justify-between bg-bgdarkgray font-normal font-montserrat text-white text-sm">
+    <footer className="lg:px-6 px-4 py-6 gap-4 flex flex-row justify-between bg-bgdarkgray font-normal font-montserrat text-white text-sm">
       <section className="flex flex-col justify-between">
         <div className="flex flex-col nowrap text-baseline">
           <h2>Многопрофильный</h2>
@@ -19,7 +19,7 @@ const Footer = () => {
           <h2 className="text-lg">Режим работы</h2>
           <div className="flex flex-row gap-2">
             <div className="flex flex-col justify-center w-[22px]">
-              <img src={hours} alt="номера телефонов" className="" />
+              <img src={hours} alt="часы работы" className="" />
             </div>
             <div className="flex flex-col">
               <p>Пн-Вс: 08:00 - 22:00</p>

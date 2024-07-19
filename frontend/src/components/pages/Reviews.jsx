@@ -61,8 +61,85 @@ const Reviews = () => {
   const currentReviews = reviews.slice(indexOfFirstReview, indexOfLastReview);
 
   return (
-    <section className="flex grow flex-row p-6 font-montserrat">
-      <div className="flex flex-col w-3/5 bg-bggray rounded-lg p-6">
+    <section className="flex flex-col lg:flex-row-reverse lg:p-6 p-4 font-montserrat">
+      <div className="flex flex-col w-full lg:w-2/5  rounded-lg lg:ml-8 mb-6 lg:mb-0">
+        <form className="bg-bggray nogrow rounded-lg lg:p-6 p-4" onSubmit={handleSubmit}>
+          <h2 className="text-2xl font-medium lg:mb-8 mb-4">Оставить отзыв:</h2>
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-semibold mb-2"
+              htmlFor="name"
+            >
+              Ф.И.О:
+            </label>
+            <input
+              required
+              id="name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-semibold mb-2"
+              htmlFor="email"
+            >
+              Email:
+            </label>
+            <input
+              required
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-semibold mb-2"
+              htmlFor="phone"
+            >
+              Телефон:
+            </label>
+            <input
+              required
+              id="phone"
+              type="text"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-semibold mb-2"
+              htmlFor="text"
+            >
+              Текст отзыва:
+            </label>
+            <textarea
+              required
+              id="text"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            ></textarea>
+          </div>
+          <div className="flex items-center justify-between">
+            <button
+              type="submit"
+              className="bg-maingreen hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Отправить
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div className="flex flex-col w-full lg:w-3/5 bg-bggray rounded-lg p-4 lg:p-6">
         <div className="w-full">
           <h2 className="text-2xl font-medium mb-4">
             Отзывы о клинике и наших врачах:
@@ -74,7 +151,7 @@ const Reviews = () => {
                 className="bg-white mb-4 p-4 rounded shadow w-full"
               >
                 <div className="flex flex-row w-full">
-                  <div className="mr-4 border-black rounded-full bg-bggray p-4 w-[78px] h-[78px]">
+                  <div className="mr-4 border-black rounded-full bg-bggray p-4 w-[70px] h-[70px]">
                     <ReviewIcon />
                   </div>
                   <div className="flex flex-col flex-1">
@@ -104,83 +181,6 @@ const Reviews = () => {
             ))}
           </div>
         </div>
-      </div>
-
-      <div className="flex flex-col w-2/5 ml-6">
-        <form className="mb-8 bg-bggray rounded-lg p-6" onSubmit={handleSubmit}>
-          <h2 className="text-2xl font-medium mb-8">Оставить отзыв:</h2>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-semibold mb-2"
-              htmlFor="name"
-            >
-              Ф.И.О:
-            </label>
-            <input
-              required
-              id="name"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="shadow appearance-none  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-semibold mb-2"
-              htmlFor="email"
-            >
-              Email:
-            </label>
-            <input
-              required
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="shadow appearance-none  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-semibold mb-2"
-              htmlFor="phone"
-            >
-              Телефон:
-            </label>
-            <input
-              required
-              id="phone"
-              type="text"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              className="shadow appearance-none  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-semibold mb-2"
-              htmlFor="text"
-            >
-              Текст отзыва:
-            </label>
-            <textarea
-              required
-              id="text"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              className="shadow appearance-none  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            ></textarea>
-          </div>
-          <div className="flex items-center justify-between">
-            <button
-              type="submit"
-              className="bg-maingreen hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            >
-              Отправить
-            </button>
-          </div>
-        </form>
       </div>
     </section>
   );
