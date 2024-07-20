@@ -6,6 +6,7 @@ module.exports = {
       maingreen: "#28926E",
       mainblue: "#0273BF",
       bggray: "#F6F8F7",
+      navbargray: "#F2F2F2",
       bgdarkgray: "#343434",
       white: "#FFFFFF",
       red: "#FF0101",
@@ -17,6 +18,7 @@ module.exports = {
     },
     extend: {
       screens: {
+        mobile: "350px",
         tablet: "640px",
         laptop: "1024px",
         desktop: "1280px",

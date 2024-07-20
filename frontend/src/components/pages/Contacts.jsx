@@ -9,8 +9,8 @@ import YandexMap from "../subcomponents/YandexMap"; // Импортируйте 
 // todo: fix responsiveness
 const Contacts = () => {
   return (
-    <section className="flex flex-col flex-start grow p-1 tablet:px-4 tablet:pt-4 tablet laptop:px-8 desktop:px-16 large:px-64 font-montserrat">
-      <h2 className="flex justify-center w-full mb-4 py-2 pl-4 rounded-lg bg-bggray text-black font-montserrat text-lg lg:text-xl">
+    <section className="flex flex-col flex-start grow p-1 tablet:px-4 tablet:pt-4 tablet laptop:px-8 desktop:px-16 large:px-64 font-montserrat text-base">
+      <h2 className="flex justify-center w-full mb-4 py-2 pl-4 rounded-lg bg-bggray text-black font-montserrat">
         КОНТАКТНАЯ ИНФОРМАЦИЯ
       </h2>
       <div className="flex flex-col">
@@ -30,7 +30,7 @@ const Contacts = () => {
                     <img src={hours} alt="режим работы" className="" />
                   </div>
                   <div className="flex flex-col">
-                    <h2 className="text-lg">Режим работы</h2>
+                    <h2 className="">Режим работы</h2>
                     <p>Пн-Вс: 08:00 - 22:00</p>
                   </div>
                 </div>

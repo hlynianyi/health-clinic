@@ -1,31 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import { styled } from "@mui/material/styles";
-import PhoneIcon from "@mui/icons-material/PhoneIphoneRounded";
+import { Button, IconButton, Menu, MenuItem } from "@mui/material";
+import PhoneIcon from "@mui/icons-material/Smartphone";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import HomeIcon from "@mui/icons-material/Home";
 import MenuIcon from "@mui/icons-material/Menu";
-import { green, grey } from "@mui/material/colors";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
+import { green } from "@mui/material/colors";
 import navbarLogo from "../../assets/logo3.webp";
-// import { useAuth } from "../../context/AuthContext";
-
-const whiteGrey = grey["A100"];
 
 const MENU = [
   { label: "Врачи", path: "/doctors" },
   { label: "Услуги", path: "/services" },
   { label: "Диагностика", path: "/diagnostics" },
-  // { label: "Анализы", path: "/tests" },
   { label: "Акции", path: "/promotions" },
   { label: "Пациентам", path: "/patients" },
   { label: "Отзывы", path: "/reviews" },
@@ -33,31 +19,31 @@ const MENU = [
 ];
 
 const ColorButton = styled(Button)(({ theme }) => ({
-  height: 45,
-  color: whiteGrey,
+  height: 40,
+  color: "#FFFF",
   backgroundColor: "#28926E",
   "&:hover": {
     backgroundColor: "#1976D2",
   },
-  fontSize: 14,
-}));
-
-const HomeButton = styled(IconButton)(({ theme }) => ({
-  color: "inherit",
-  "&:hover": {
-    backgroundColor: green[100],
-  },
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
+  fontSize: 12,
 }));
 
 const CombinedNavbar = () => {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
+  const [isPhoneScreen, setIsPhoneScreen] = useState(window.innerWidth < 490);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+      setIsPhoneScreen(window.innerWidth < 490);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleNavigation = (path) => {
     navigate(path);
@@ -73,44 +59,37 @@ const CombinedNavbar = () => {
   };
 
   return (
-    <AppBar color="default" position="static" sx={{ boxShadow: "none" }}>
-      <Toolbar
-        sx={{
-          justifyContent: "space-between",
-          padding: "4px 4px",
-        }}
-      >
-        <Box display="flex" alignItems="center">
-          <Box
-            component="img"
+    <div className="bg-bggray shadow-none">
+      <div className="flex justify-between items-center p-1 tablet:px-4 laptop:px-8 desktop:px-16 large:px-64">
+        <div className="flex items-center">
+          <img
             src={navbarLogo}
             alt="Clinic Logo"
-            sx={{ height: 45, backgroundColor: "transparent" }}
+            className="h-10 rounded-lg cursor-pointer"
+            onClick={() => navigate("/")}
           />
-        </Box>
-        <Box display="flex" alignItems="center" gap={2}>
-          <div className="flex justify-center items-center gap-1">
-            <PhoneIcon fontSize="large" style={{ color: '#B8BAB9'}}/>
-            <div display="flex flex-col">
-              <p className="font-light font-montserrat text-gray-100 text-xs">
-                Круглосуточная запись:
+        </div>
+        <div className="flex items-center gap-2 tablet:gap-6">
+          <div className="mr-1 flex items-center gap-0">
+            {isPhoneScreen ? (
+              <PhoneIcon fontSize="medium" style={{ color: "#B8BAB9" }} />
+            ) : (
+              <PhoneIcon fontSize="large" style={{ color: "#B8BAB9" }} />
+            )}
+            <div className="flex flex-col">
+              <p className="font-light font-montserrat text-gray-600 text-xs">
+                {isPhoneScreen ? "" : "Круглосуточная запись:"}
               </p>
-              <div className="flex flex-row">
-                <p variant="subtitle2" fontWeight="">
-                  +7 (495) 187-88-36
-                </p>
-              </div>
+              <p className="font-montserrat text-sm">+7 (495) 187-88-36</p>
             </div>
           </div>
-
-          <IconButton>
+          <IconButton onClick={handleClick}>
             <MenuIcon
               id="basic-button"
               aria-controls={open ? "basic-menu" : undefined}
               aria-haspopup="true"
               aria-expanded={open ? "true" : undefined}
-              onClick={handleClick}
-            ></MenuIcon>
+            />
           </IconButton>
           <Menu
             id="basic-menu"
@@ -120,16 +99,27 @@ const CombinedNavbar = () => {
             MenuListProps={{
               "aria-labelledby": "basic-button",
             }}
+            PaperProps={{
+              style: {
+                width: "100%",
+                left: 0,
+                right: 0,
+                top: "0px", // Adjust if needed based on your app bar height
+                position: "fixed",
+                backgroundColor: "#fff", // or any other color you prefer
+              },
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "center",
+            }}
           >
-            <MenuItem onClick={() => handleNavigation("/")}>
-              <HomeButton color="primary" aria-label="home">
-                <HomeIcon />
-              </HomeButton>
-            </MenuItem>
             {MENU.map((item) => (
               <MenuItem
                 key={item.label}
                 onClick={() => handleNavigation(item.path)}
+                className="flex justify-center"
+                sx={{ justifyContent: "center" }}
               >
                 {item.label}
               </MenuItem>
@@ -138,9 +128,9 @@ const CombinedNavbar = () => {
           <ColorButton startIcon={<AssignmentIcon />} variant="">
             {isSmallScreen ? <p>Записаться</p> : <p>Записаться онлайн</p>}
           </ColorButton>
-        </Box>
-      </Toolbar>
-    </AppBar>
+        </div>
+      </div>
+    </div>
   );
 };
 

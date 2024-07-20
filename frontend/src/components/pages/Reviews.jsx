@@ -61,7 +61,7 @@ const Reviews = () => {
   const currentReviews = reviews.slice(indexOfFirstReview, indexOfLastReview);
 
   return (
-    <section className="flex flex-col lg:flex-row-reverse lg:p-6 p-4 font-montserrat">
+    <section className="flex flex-col lg:flex-row-reverse p-1 tablet:px-4 tablet:py-4 tablet laptop:px-8 desktop:px-16 large:px-64 font-montserrat">
       <div className="flex flex-col w-full lg:w-2/5  rounded-lg lg:ml-8 mb-6 lg:mb-0">
         <form className="bg-bggray nogrow rounded-lg lg:p-6 p-4" onSubmit={handleSubmit}>
           <h2 className="text-2xl font-medium lg:mb-8 mb-4">Оставить отзыв:</h2>
