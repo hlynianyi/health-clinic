@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
-import { styled } from "@mui/material/styles";
+import { Button, IconButton } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
-import { IconButton } from "@mui/material";
-import { orange, green } from "@mui/material/colors";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
@@ -15,31 +9,11 @@ const MENU = [
   { label: "Врачи", path: "/doctors" },
   { label: "Услуги", path: "/services" },
   { label: "Диагностика", path: "/diagnostics" },
-  // { label: "Анализы", path: "/tests" },
   { label: "Акции", path: "/promotions" },
   { label: "Пациентам", path: "/patients" },
   { label: "Отзывы", path: "/reviews" },
   { label: "Контакты", path: "/contacts" },
 ];
-
-const NavbarButton = styled(Button)(({ theme }) => ({
-  color: "inherit",
-  "&:hover": {
-    backgroundColor: "#28926E",
-  },
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-const HomeButton = styled(IconButton)(({ theme }) => ({
-  color: "inherit",
-  "&:hover": {
-    backgroundColor: "#28926E",
-  },
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
 
 const NavbarLower = () => {
   const [currentActiveTab, setCurrentActiveTab] = useState("");
@@ -53,49 +27,48 @@ const NavbarLower = () => {
   };
 
   return (
-    <AppBar color="transparent" position="static" sx={{ boxShadow: "none" }}>
-      <Toolbar
-        sx={{
-          justifyContent: isSmallScreen ? "space-between" : "center",
-        }}
+    <div className="bg-mainblue w-full text-white">
+      <div
+        className={`flex ${
+          isSmallScreen ? "justify-between" : "justify-center"
+        } items-center py-2 px-4`}
       >
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 1,
-            flexWrap: "wrap",
-          }}
-        >
-          <HomeButton
-            color="primary"
-            aria-label="add to shopping cart"
-            onClick={() => handleNavigation("/")}
+        <div className="flex items-center gap-2 flex-wrap">
+          <IconButton
             sx={{
-              display: "flex",
+              color: "#FFFF",
               backgroundColor:
-                currentActiveTab === "/" ? "warning.light" : "transparent",
+                currentActiveTab === "/" ? "#FFA500" : "transparent", // bg-orange-200 -> #FFA500
+              "&:hover": {
+                backgroundColor: "#FFFF",
+                color: "#28926E",
+              },
             }}
+            aria-label="home"
+            onClick={() => handleNavigation("/")}
           >
             <HomeIcon />
-          </HomeButton>
+          </IconButton>
           {MENU.map((item) => (
-            <NavbarButton
+            <Button
               key={item.label}
               onClick={() => handleNavigation(item.path)}
               sx={{
+                color: "white",
                 backgroundColor:
-                  currentActiveTab === item.path
-                    ? "warning.light"
-                    : "transparent",
+                  currentActiveTab === item.path ? "#FFA500" : "transparent", // bg-red -> #FF0000
+                "&:hover": {
+                  backgroundColor: "#FFFF",
+                  color: "#28926E",
+                },
               }}
             >
               {item.label}
-            </NavbarButton>
+            </Button>
           ))}
-        </Box>
-      </Toolbar>
-    </AppBar>
+        </div>
+      </div>
+    </div>
   );
 };
 

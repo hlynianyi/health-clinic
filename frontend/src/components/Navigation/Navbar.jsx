@@ -13,7 +13,7 @@ const NavBar = () => {
   // const navigate = useNavigate();
 
   return (
-    <div className="border-4 border-purple tablet:border-red laptop:border-blue desktop:border-yellow large:border-maingreen">
+    <div className="">
         {/* <div className="flex justify-between items-center">
           <div>
             {isAuthenticated ? (
@@ -34,14 +34,15 @@ const NavBar = () => {
             )}
           </div>
         </div> */}
-        {isSmallScreen ? (
+        <CombinedNavbar />
+        {/* {isSmallScreen ? (
           <CombinedNavbar />
         ) : (
           <>
             <NavbarUpper />
             <NavbarLower />
           </>
-        )}
+        )} */}
     </div>
   );
 };

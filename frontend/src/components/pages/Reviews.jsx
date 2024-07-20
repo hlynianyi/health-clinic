@@ -61,124 +61,132 @@ const Reviews = () => {
   const currentReviews = reviews.slice(indexOfFirstReview, indexOfLastReview);
 
   return (
-    <section className="flex flex-col lg:flex-row-reverse p-1 tablet:px-4 tablet:py-4 tablet laptop:px-8 desktop:px-16 large:px-64 font-montserrat">
-      <div className="flex flex-col w-full lg:w-2/5  rounded-lg lg:ml-8 mb-6 lg:mb-0">
-        <form className="bg-bggray nogrow rounded-lg lg:p-6 p-4" onSubmit={handleSubmit}>
-          <h2 className="text-2xl font-medium lg:mb-8 mb-4">Оставить отзыв:</h2>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-semibold mb-2"
-              htmlFor="name"
-            >
-              Ф.И.О:
-            </label>
-            <input
-              required
-              id="name"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-semibold mb-2"
-              htmlFor="email"
-            >
-              Email:
-            </label>
-            <input
-              required
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-semibold mb-2"
-              htmlFor="phone"
-            >
-              Телефон:
-            </label>
-            <input
-              required
-              id="phone"
-              type="text"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-semibold mb-2"
-              htmlFor="text"
-            >
-              Текст отзыва:
-            </label>
-            <textarea
-              required
-              id="text"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            ></textarea>
-          </div>
-          <div className="flex items-center justify-between">
-            <button
-              type="submit"
-              className="bg-maingreen hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            >
-              Отправить
-            </button>
-          </div>
-        </form>
-      </div>
-
-      <div className="flex flex-col w-full lg:w-3/5 bg-bggray rounded-lg p-4 lg:p-6">
-        <div className="w-full">
-          <h2 className="text-2xl font-medium mb-4">
-            Отзывы о клинике и наших врачах:
-          </h2>
-          <div className="flex flex-col w-full">
-            {currentReviews.map((review) => (
-              <div
-                key={review._id}
-                className="bg-white mb-4 p-4 rounded shadow w-full"
+    <section className=" p-1 tablet:px-4 tablet:py-4 tablet laptop:px-8 desktop:px-16 large:px-64 font-montserrat">
+      <h2 className="flex justify-center w-full mb-4 py-2 pl-4 rounded-lg bg-bggray text-black font-montserrat">
+        ОТЗЫВЫ
+      </h2>
+      <div className="flex flex-col lg:flex-row-reverse">
+        <div className="flex flex-col w-full lg:w-2/5  rounded-lg lg:ml-8 mb-6 lg:mb-0">
+          <form
+            className="bg-bggray nogrow rounded-lg lg:p-6 p-4"
+            onSubmit={handleSubmit}
+          >
+            <h2 className="text-lg lg:mb-8 mb-4">Оставить отзыв:</h2>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 text-sm font-semibold mb-2"
+                htmlFor="name"
               >
-                <div className="flex flex-row w-full">
-                  <div className="mr-4 border-black rounded-full bg-bggray p-4 w-[70px] h-[70px]">
-                    <ReviewIcon />
-                  </div>
-                  <div className="flex flex-col flex-1">
-                    <p className="font-medium text-lg">{review.name}</p>
-                    <p className="mt-2 mb-4 px-4 py-1 text-gray-600 text-[14px] bg-maingreen text-white rounded w-[180px]">
-                      Отзыв от: {review.date}
-                    </p>
-                    <p className="font-sans text-lg">{review.text}</p>
+                Ф.И.О:
+              </label>
+              <input
+                required
+                id="name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 text-sm font-semibold mb-2"
+                htmlFor="email"
+              >
+                Email:
+              </label>
+              <input
+                required
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 text-sm font-semibold mb-2"
+                htmlFor="phone"
+              >
+                Телефон:
+              </label>
+              <input
+                required
+                id="phone"
+                type="text"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 text-sm font-semibold mb-2"
+                htmlFor="text"
+              >
+                Текст отзыва:
+              </label>
+              <textarea
+                required
+                id="text"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              ></textarea>
+            </div>
+            <div className="flex items-center justify-between">
+              <button
+                type="submit"
+                className="bg-maingreen hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >
+                Отправить
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div className="flex flex-col w-full lg:w-3/5 bg-bggray rounded-lg p-4 lg:p-6">
+          <div className="w-full">
+            <h2 className="text-lg mb-4">Отзывы о клинике и наших врачах:</h2>
+            <div className="flex flex-col w-full">
+              {currentReviews.map((review) => (
+                <div
+                  key={review._id}
+                  className="bg-white mb-4 p-4 rounded shadow w-full"
+                >
+                  <div className="flex flex-row w-full">
+                    <div className="mr-4 border-black rounded-full bg-bggray p-4 w-[70px] h-[70px]">
+                      <ReviewIcon />
+                    </div>
+                    <div className="flex flex-col flex-1">
+                      <p className="font-medium text-lg">{review.name}</p>
+                      <p className="mt-2 mb-4 px-4 py-1 text-gray-600 text-[14px] bg-maingreen text-white rounded w-[180px]">
+                        Отзыв от: {review.date}
+                      </p>
+                      <p className="font-sans text-[14px] tablet:text-base">
+                        {review.text}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-          <div className="flex justify-center mt-4">
-            {Array.from({ length: totalPages }, (_, index) => (
-              <button
-                key={index + 1}
-                onClick={() => handlePageChange(index + 1)}
-                className={`mx-1 px-3 py-1 rounded ${
-                  currentPage === index + 1
-                    ? "bg-maingreen text-white"
-                    : "bg-white text-maingreen"
-                }`}
-              >
-                {index + 1}
-              </button>
-            ))}
+              ))}
+            </div>
+            <div className="flex justify-center mt-4">
+              {Array.from({ length: totalPages }, (_, index) => (
+                <button
+                  key={index + 1}
+                  onClick={() => handlePageChange(index + 1)}
+                  className={`mx-1 px-3 py-1 rounded ${
+                    currentPage === index + 1
+                      ? "bg-maingreen text-white"
+                      : "bg-white text-maingreen"
+                  }`}
+                >
+                  {index + 1}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>
