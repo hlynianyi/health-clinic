@@ -25,25 +25,27 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   return (
-    <AppBar position="static">
-      {/* <Box>
+    <div className="border-4 border-purple tablet:border-red laptop:border-blue desktop:border-yellow large:border-maingreen">
+      <AppBar position="static">
+        <Box>
           {isAuthenticated ? (
             <Button color="inherit" onClick={logout}>
               Выйти
             </Button>
           ) : (
-            <ColorButton onClick={() => navigate("/login")}>Войти</ColorButton>
+            <ColorButton onClick={() => navigate("/admin")}>Войти</ColorButton>
           )}
-        </Box> */}
-      {isSmallScreen ? (
-        <CombinedNavbar />
-      ) : (
-        <>
-          <NavbarUpper />
-          <NavbarLower />
-        </>
-      )}
-    </AppBar>
+        </Box>
+        {isSmallScreen ? (
+          <CombinedNavbar />
+        ) : (
+          <>
+            <NavbarUpper />
+            <NavbarLower />
+          </>
+        )}
+      </AppBar>
+    </div>
   );
 };
 

@@ -3,60 +3,74 @@ import hours from "../../assets/hours.webp";
 import tel from "../../assets/tel.webp";
 import mail from "../../assets/mail.webp";
 import location from "../../assets/location.webp";
-import YandexMap from "../subcomponents/YandexMap"; // Импортируйте компонент карты
+import fakephoto from "../../assets/fakephoto_building.jpg";
 
+import YandexMap from "../subcomponents/YandexMap"; // Импортируйте компонент карты
+// todo: fix responsiveness
 const Contacts = () => {
   return (
-    <section className="flex flex-col justify-between grow p-4 font-montserrat">
-      <h2 className="flex justify-center  w-full lg:w-[60%] mb-6 py-2 pl-4 rounded-lg bg-bggray text-black font-montserrat text-lg lg:text-xl">
+    <section className="flex flex-col flex-start grow p-1 tablet:px-4 tablet:pt-4 tablet laptop:px-8 desktop:px-16 large:px-64 font-montserrat">
+      <h2 className="flex justify-center w-full mb-4 py-2 pl-4 rounded-lg bg-bggray text-black font-montserrat text-lg lg:text-xl">
         КОНТАКТНАЯ ИНФОРМАЦИЯ
       </h2>
       <div className="flex flex-col">
-        <div className="w-full flex flex-row">
-          <section className="flex flex-row w-1/3">
-            <div className="flex flex-col gap-6">
-              <div className="flex flex-row gap-2">
-                <div className="flex flex-col justify-center w-[35px]">
-                  <img src={hours} alt="номера телефонов" className="" />
-                </div>
-                <div className="flex flex-col">
-                  <h2 className="text-lg">Режим работы</h2>
-                  <p>Пн-Вс: 08:00 - 22:00</p>
-                </div>
-              </div>
-              <div className="flex flex-row gap-2">
-                <div className="flex flex-col justify-center h-[52px] w-[35px]">
-                  <img
-                    src={location}
-                    alt="адрес клиники"
-                    className="h-[35px] w-[28px] ml-[2px]"
-                  />
-                </div>
-                <div className="flex flex-col">
-                  <p>г. Михайловск</p>
-                  <p>ул. Демидова, д. 142/2</p>
+        <div className="flex flex-col lg:flex-row justify-between gap-4">
+          <section className="flex justify-center w-full lg:w-2/3 bg-bggray rounded-lg">
+            <img
+              className="object-cover p-4  rounded-lg"
+              src={fakephoto}
+              alt="фото здания"
+            />
+          </section>
+          <section className="flex flex-col  lg:w-1/3 w-full rounded-lg bg-bggray laptop:items-center laptop:align-center p-4">
+            <div className="flex flex-wrap justify-between  gap-4 lg:flex-col lg:gap-8">
+              <div className="flex flex-row min-w-[280px] justify-between gap-4 shrink lg:flex-col lg:min-w-full">
+                <div className="flex flex-row gap-2">
+                  <div className="flex flex-col justify-center w-[35px]">
+                    <img src={hours} alt="режим работы" className="" />
+                  </div>
+                  <div className="flex flex-col">
+                    <h2 className="text-lg">Режим работы</h2>
+                    <p>Пн-Вс: 08:00 - 22:00</p>
+                  </div>
                 </div>
               </div>
-              <div className="flex flex-row gap-2">
-                <div className="flex flex-col justify-center w-[35px]">
-                  <img src={tel} alt="номера телефонов" className="" />
-                </div>
-                <div className="flex flex-col justify-center">
-                  <p>+7 (495) 187-88-36</p>
+              <div className="flex flex-row min-w-[280px] justify-between gap-4 shrink-0 lg:flex-col lg:min-w-full">
+                <div className="flex flex-row gap-2">
+                  <div className="flex flex-col justify-center h-[52px] w-[35px]">
+                    <img
+                      src={location}
+                      alt="адрес клиники"
+                      className="h-[35px] w-[28px] ml-[2px]"
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <p>г. Михайловск</p>
+                    <p>ул. Демидова, д. 142/2</p>
+                  </div>
                 </div>
               </div>
-              <div className="flex flex-row gap-2">
-                <div className="flex flex-col justify-center w-[35px]">
-                  <img src={mail} alt="электронная почта" className="" />
+              <div className="flex flex-row min-w-[280px] justify-between gap-4 shrink-0 lg:flex-col lg:min-w-full">
+                <div className="flex flex-row gap-2">
+                  <div className="flex flex-col justify-center w-[35px]">
+                    <img src={tel} alt="номера телефонов" className="" />
+                  </div>
+                  <div className="flex flex-col justify-center">
+                    <p>+7 (495) 187-88-36</p>
+                  </div>
                 </div>
-                <div className="flex flex-col">
-                  <p>nademidova.clinic@mail.ru</p>
+              </div>
+              <div className="flex flex-row min-w-[280px] justify-between gap-4 shrink-0 lg:flex-col lg:min-w-full">
+                <div className="flex flex-row gap-2 items-center">
+                  <div className="flex flex-col justify-center w-[35px]">
+                    <img src={mail} alt="электронная почта" className="" />
+                  </div>
+                  <div className="flex flex-col">
+                    <p>nademidova.clinic@mail.ru</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </section>
-          <section className="flex grow w-2/3 bg-bggray">
-            <div className="flex grow justify-center items-center">ФОТОГРАФИЯ ЦЕНТРА</div>
           </section>
         </div>
       </div>
