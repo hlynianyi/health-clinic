@@ -61,17 +61,19 @@ const Reviews = () => {
   const currentReviews = reviews.slice(indexOfFirstReview, indexOfLastReview);
 
   return (
-    <section className=" p-1 tablet:px-4 tablet:py-4 tablet laptop:px-8 desktop:px-16 large:px-64 font-montserrat">
-      <h2 className="flex justify-center w-full mb-4 py-2 pl-4 rounded-lg bg-bggray text-black font-montserrat">
+    <>
+      <h2 className="flex justify-center w-full mb-2 tablet:mb-4 py-2 pl-4 rounded-lg bg-bggray text-black font-montserrat">
         ОТЗЫВЫ
       </h2>
-      <div className="flex flex-col lg:flex-row-reverse">
+      <section className="flex flex-col lg:flex-row-reverse">
         <div className="flex flex-col w-full lg:w-2/5  rounded-lg lg:ml-8 mb-6 lg:mb-0">
           <form
             className="bg-bggray nogrow rounded-lg lg:p-6 p-4"
             onSubmit={handleSubmit}
           >
-            <h2 className="text-lg lg:mb-8 mb-4">Оставить отзыв:</h2>
+            <h2 className="text-lg lg:mb-8  mb-2 tablet:mb-4">
+              Оставить отзыв:
+            </h2>
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-semibold mb-2"
@@ -146,12 +148,14 @@ const Reviews = () => {
           </form>
         </div>
 
-        <div className="flex flex-col w-full lg:w-3/5 bg-bggray rounded-lg p-4 lg:p-6">
+        <section className="flex flex-col w-full lg:w-3/5 bg-bggray rounded-lg p-4 lg:p-6">
           <div className="w-full">
-            <h2 className="text-lg mb-4">Отзывы о клинике и наших врачах:</h2>
+            <h2 className="text-lg mb-2 tablet:mb-4">
+              Отзывы о клинике и наших врачах:
+            </h2>
             <div className="flex flex-col w-full">
               {currentReviews.map((review) => (
-                <div
+                <article
                   key={review._id}
                   className="bg-white mb-4 p-4 rounded shadow w-full"
                 >
@@ -169,7 +173,7 @@ const Reviews = () => {
                       </p>
                     </div>
                   </div>
-                </div>
+                </article>
               ))}
             </div>
             <div className="flex justify-center mt-4">
@@ -188,9 +192,9 @@ const Reviews = () => {
               ))}
             </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
+      </section>
+    </>
   );
 };
 

@@ -1,7 +1,7 @@
 import React from "react";
 
 const Services = () => {
-  return <section className="flex grow"></section>;
+  return <></>;
 };
 
 export default Services;

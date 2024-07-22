@@ -39,7 +39,7 @@ const NavbarLower = () => {
             sx={{
               color: "#FFFF",
               backgroundColor:
-                currentActiveTab === "/" ? "#FFA500" : "transparent", // bg-orange-200 -> #FFA500
+                currentActiveTab === "/" ? "#FFA500" : "transparent",
               "&:hover": {
                 backgroundColor: "#FFFF",
                 color: "#28926E",

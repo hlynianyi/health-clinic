@@ -43,37 +43,40 @@ const App = () => {
       <AuthProvider>
         <Router>
           <Header />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<UserLogin />} />
-            <Route path="/admin" element={<AdminLogin />} />
-            <Route
-              path="/dashboard"
-              element={
-                <ProtectedRoute adminOnly={true}>
-                  <Dashboard />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/register-doctor"
-              element={
-                <ProtectedRoute adminOnly={true}>
-                  <RegisterDoctor />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="/doctors" element={<Doctors />} />
-            <Route path="/doctor/:id" element={<DoctorDetails />} />{" "}
-            {/* Новый маршрут */}
-            <Route path="/services" element={<Services />} />
-            <Route path="/diagnostics" element={<Diagnostic />} />
-            <Route path="/promotions" element={<Offers />} />
-            <Route path="/patients" element={<Patients />} />
-            <Route path="/license" element={<License />} />
-            <Route path="/reviews" element={<Reviews />} />
-            <Route path="/contacts" element={<Contacts />} />
-          </Routes>
+          <main className="flex flex-col grow tablet:px-4 tablet:pt-4 tablet laptop:px-8 desktop:px-16 large:px-64 font-montserrat text-base">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/login" element={<UserLogin />} />
+              <Route path="/admin" element={<AdminLogin />} />
+              <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute adminOnly={true}>
+                    <Dashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/register-doctor"
+                element={
+                  <ProtectedRoute adminOnly={true}>
+                    <RegisterDoctor />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="/doctors" element={<Doctors />} />
+              <Route path="/doctors/:id" element={<DoctorDetails />} />
+              {/* Новый маршрут */}
+              <Route path="/services" element={<Services />} />
+              <Route path="/diagnostics" element={<Diagnostic />} />
+              <Route path="/promotions" element={<Offers />} />
+              <Route path="/patients" element={<Patients />} />
+              <Route path="/license" element={<License />} />
+              <Route path="/reviews" element={<Reviews />} />
+              <Route path="/contacts" element={<Contacts />} />
+            </Routes>
+          </main>
+
           <Footer />
         </Router>
       </AuthProvider>

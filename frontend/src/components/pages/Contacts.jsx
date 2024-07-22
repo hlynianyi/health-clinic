@@ -9,20 +9,20 @@ import YandexMap from "../subcomponents/YandexMap"; // Импортируйте 
 // todo: fix responsiveness
 const Contacts = () => {
   return (
-    <section className="flex flex-col flex-start grow p-1 tablet:px-4 tablet:pt-4 tablet laptop:px-8 desktop:px-16 large:px-64 font-montserrat text-base">
-      <h2 className="flex justify-center w-full mb-4 py-2 pl-4 rounded-lg bg-bggray text-black font-montserrat">
+    <>
+      <h2 className="flex justify-center w-full mb-2 tablet:mb-4 py-2 pl-4 rounded-lg bg-bggray text-black font-montserrat">
         КОНТАКТНАЯ ИНФОРМАЦИЯ
       </h2>
-      <div className="flex flex-col">
+      <section className="flex flex-col">
         <div className="flex flex-col lg:flex-row justify-between gap-4">
-          <section className="flex justify-center w-full lg:w-2/3 bg-bggray rounded-lg">
+          <div className="flex justify-center w-full lg:w-2/3 bg-bggray rounded-lg">
             <img
               className="object-cover p-4  rounded-lg"
               src={fakephoto}
               alt="фото здания"
             />
-          </section>
-          <section className="flex flex-col  lg:w-1/3 w-full rounded-lg bg-bggray laptop:items-center laptop:align-center p-4">
+          </div>
+          <aside className="flex flex-col  lg:w-1/3 w-full rounded-lg bg-bggray laptop:items-center laptop:align-center p-4">
             <div className="flex flex-wrap justify-between  gap-4 lg:flex-col lg:gap-8">
               <div className="flex flex-row min-w-[280px] justify-between gap-4 shrink lg:flex-col lg:min-w-full">
                 <div className="flex flex-row gap-2">
@@ -71,11 +71,11 @@ const Contacts = () => {
                 </div>
               </div>
             </div>
-          </section>
+          </aside>
         </div>
-      </div>
+      </section>
       <YandexMap /> {/* Добавьте компонент карты */}
-    </section>
+    </>
   );
 };
 
