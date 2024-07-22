@@ -53,15 +53,17 @@ const DoctorDetails = () => {
             {doctor.name}
           </h2>
           <section className="flex flex-col text-base">
-            <div className="flex flex-col lg:flex-row justify-between ">
-              <aside className="flex flex-col items-center lg:w-1/3 w-full rounded-lg bg-bggray laptop:items-center laptop:align-center p-4">
-                <img
-                  className="w-[250px] rounded-full tablet:rounded-lg object-cover mix-blend-normal"
-                  src={`http://localhost:5000/${doctor.photo}`}
-                  alt={doctor.name}
-                />
-              </aside>
-              <section className="py-1 px-2 tablet:p-4 flex flex-col justify-start w-full lg:w-2/3 bg-bggray gap-2">
+            <div className="flex flex-col lg:flex-row justify-between gap-2">
+              <div className=" flex justify-center shrink-0">
+                <aside className="flex shrink-0 flex-row justify-center w-fit h-min rounded-lg bg-bggray laptop:items-center laptop:align-center p-4 mr-2 mb-2">
+                  <img
+                    className=" w-[250px] shrink-0 rounded-lg tablet:rounded-lg object-cover mix-blend-normal"
+                    src={`http://localhost:5000/${doctor.photo}`}
+                    alt={doctor.name}
+                  />
+                </aside>
+              </div>
+              <section className="py-1 px-2 tablet:p-4 tablet:px-8 desktop:px-10 flex flex-col justify-start w-full  bg-bggray gap-2 rounded-lg">
                 <div className="pb-2 flex border-b-[1px] border-b-mainblue">
                   <div className="w-[140px] mr-3">
                     <p>Должность</p>
@@ -92,7 +94,7 @@ const DoctorDetails = () => {
                     <p>График работы</p>
                   </div>
                   <div className="flex flex-row flex-start gap-2 flex-wrap">
-                    <p>Понедельник, Среда, Пятница; 10:00 - 16:00</p>
+                    <p>{doctor.schedule}</p>
                   </div>
                 </div>
 
@@ -101,28 +103,21 @@ const DoctorDetails = () => {
                     <p>Образование</p>
                   </div>
                   <div className="flex flex-row flex-start gap-2 flex-wrap">
-                    <p>
-                      1995г. Московский государственный медико-стоматологический
-                      университет Евдокимова (лечебное дело ) 2011г. Московский
-                      государственный медико-стоматологический университет
-                      Евдокимова ( андрология) Ординатура: 2012 г. Дагестанский
-                      государственный медицинский университет (
-                      дерматовенерология)
-                    </p>
+                    <p>{doctor.education}</p>
                   </div>
                 </div>
 
-                <div className="pb-2 flex border-b-[1px] border-b-mainblue wrap">
+                <div className="pb-2 flex wrap">
                   <div className="w-[140px] mr-3 shrink-0">
                     <p>О специалисте</p>
                   </div>
                   <div className="flex flex-row flex-start gap-2 flex-wrap">
-                    <p>{doctor.about}</p>
+                    <p className="mr-2 large:mr-12">{doctor.about}</p>
                   </div>
                 </div>
               </section>
             </div>
-            <section className="pt-1 pb-2 tablet:py-4 flex justify-between laptop:justify-end laptop:gap-4">
+            <section className="pt-4 pb-2 px-2 tablet:py-4 flex justify-between laptop:justify-end laptop:gap-4">
               <button
                 onClick={() => setShowReviewForm(!showReviewForm)}
                 className="bg-maingreen hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

@@ -20,6 +20,8 @@ const RegisterDoctor = () => {
   const [experience, setExperience] = useState(0);
   const [about, setAbout] = useState("");
   const [photo, setPhoto] = useState(null);
+  const [education, setEducation] = useState(""); // Новое поле для образования
+  const [schedule, setSchedule] = useState(""); // Новое поле для графика работы
 
   const handleFileChange = (e) => {
     setPhoto(e.target.files[0]);
@@ -36,6 +38,8 @@ const RegisterDoctor = () => {
     formData.append("experience", experience);
     formData.append("about", about);
     formData.append("photo", photo);
+    formData.append("education", education); // Добавление нового поля в formData
+    formData.append("schedule", schedule); // Добавление нового поля в formData
 
     try {
       await axios.post("http://localhost:5000/api/doctors/register", formData, {
@@ -53,6 +57,8 @@ const RegisterDoctor = () => {
       setExperience(0);
       setAbout("");
       setPhoto(null);
+      setEducation(""); // Очистка поля после отправки
+      setSchedule(""); // Очистка поля после отправки
     } catch (error) {
       console.error("Error registering doctor:", error);
     }
@@ -131,7 +137,22 @@ const RegisterDoctor = () => {
           }}
           variant="filled"
         />
-
+        <TextField
+          id="education"
+          label="Образование:"
+          value={education}
+          onChange={(e) => setEducation(e.target.value)}
+          style={{ width: "50%", minWidth: "350px" }}
+          variant="filled"
+        />
+        <TextField
+          id="schedule"
+          label="График работы:"
+          value={schedule}
+          onChange={(e) => setSchedule(e.target.value)}
+          style={{ width: "50%", minWidth: "350px" }}
+          variant="filled"
+        />
         <TextareaAutosize
           aria-label="textarea"
           placeholder="О специалисте:"

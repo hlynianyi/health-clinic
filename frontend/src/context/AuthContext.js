@@ -1,27 +1,36 @@
-// src/context/AuthContext.js
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
+// Создаем контекст аутентификации
 const AuthContext = createContext();
+
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
 
-  const login = (admin) => {
+  useEffect(() => {
+    // Проверяем localStorage на наличие токена при монтировании компонента
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  const login = (token) => {
+    localStorage.setItem("authToken", token);
     setIsAuthenticated(true);
-    setIsAdmin(admin);
   };
 
   const logout = () => {
+    localStorage.removeItem("authToken");
     setIsAuthenticated(false);
-    setIsAdmin(false);
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, isAdmin, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
-
-export const useAuth = () => useContext(AuthContext);

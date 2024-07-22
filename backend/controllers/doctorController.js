@@ -1,3 +1,4 @@
+// controllers/doctorController.js
 const Doctor = require("../models/Doctor");
 
 exports.getDoctors = async (req, res) => {
@@ -22,8 +23,7 @@ exports.getDoctorById = async (req, res) => {
 };
 
 exports.registerDoctor = async (req, res) => {
-  const { login, password, name, specialty, email, experience, about } =
-    req.body;
+  const { login, password, name, specialty, email, experience, about, education, schedule } = req.body;
   const photo = req.file ? req.file.path : "";
 
   const doctor = new Doctor({
@@ -35,6 +35,8 @@ exports.registerDoctor = async (req, res) => {
     experience,
     about,
     photo,
+    education, // Добавлено новое поле
+    schedule, // Добавлено новое поле
   });
 
   try {
@@ -52,7 +54,7 @@ exports.addReview = async (req, res) => {
   try {
     const doctor = await Doctor.findById(id);
     if (!doctor) {
-      return res.status(404).json({ message: "Doctor not found" });
+      return res.status(404).json({ message: 'Doctor not found' });
     }
 
     const review = { name, email, text, date: new Date() };

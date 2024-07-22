@@ -1,15 +1,6 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-
-const reviewSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  text: String,
-  date: {
-    type: Date,
-    default: Date.now
-  }
-});
+// models/Doctor.js
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
 const doctorSchema = new mongoose.Schema({
   login: { type: String, required: true, unique: true },
@@ -20,12 +11,21 @@ const doctorSchema = new mongoose.Schema({
   experience: { type: Number, required: true },
   about: { type: String },
   photo: { type: String },
-  reviews: [reviewSchema]
+  education: { type: String }, // Новое поле для образования
+  schedule: { type: String }, // Новое поле для графика работы
+  reviews: [
+    {
+      name: String,
+      email: String,
+      text: String,
+      date: Date,
+    },
+  ],
 });
 
 // Хеширование пароля перед сохранением
-doctorSchema.pre('save', async function(next) {
-  if (!this.isModified('password')) {
+doctorSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
     return next();
   }
   const salt = await bcrypt.genSalt(10);
@@ -33,4 +33,4 @@ doctorSchema.pre('save', async function(next) {
   next();
 });
 
-module.exports = mongoose.model('Doctor', doctorSchema);
+module.exports = mongoose.model("Doctor", doctorSchema);
