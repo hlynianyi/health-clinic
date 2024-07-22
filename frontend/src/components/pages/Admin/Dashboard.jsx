@@ -1,13 +1,19 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Typography } from "@mui/material";
+import { useAuth } from "../../../context/AuthContext";
 
 const Dashboard = () => {
+  const { isAuthenticated, logout } = useAuth();
+
+  console.log("dashboard.. isAuthenticated :>> ", isAuthenticated);
   const navigate = useNavigate();
 
   const handleLogout = () => {
     sessionStorage.removeItem("isAuthenticated");
-    navigate("/admin-login");
+    logout();
+    console.log("after logout - isAuthenticated :>> ", isAuthenticated);
+    navigate("/admin");
   };
 
   return (

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const AdminLogin = () => {
+  const { isAuthenticated, login } = useAuth();
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
@@ -24,7 +26,13 @@ const AdminLogin = () => {
       credentials.username === adminUsername &&
       credentials.password === adminPassword
     ) {
+      login();
       sessionStorage.setItem("isAuthenticated", "true");
+      console.log(
+        'sessionStorage.getItem("isAuthenticated") :>> ',
+        sessionStorage.getItem("isAuthenticated")
+      );
+      console.log("isAuthenticated :>> ", isAuthenticated);
       navigate("/dashboard");
     } else {
       alert("Invalid credentials");

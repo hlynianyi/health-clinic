@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "../store/store";
-import NavBar from "./Navigation/Navbar";
+import Header from "./Navigation/Header";
 import HomePage from "./pages/Home";
 import UserLogin from "./pages/UserLogin";
 import AdminLogin from "./Admin/AdminLogin";
@@ -21,13 +21,17 @@ import Offers from "./pages/Offers";
 import Patients from "./pages/Patients";
 import Reviews from "./pages/Reviews";
 import Contacts from "./pages/Contacts";
-import { AuthProvider, useAuth } from "../context/AuthContext";
+import License from "./pages/License";
+import DoctorDetails from "./pages/DoctorDetails"; // Импорт нового компонента
+import { AuthProvider } from "../context/AuthContext"; // useAuth
+
+// todo: Логин докторов(UserLogin), страница для каждого доктора с возможностью брони визита
 
 const ProtectedRoute = ({ children }) => {
   const isAuthenticated = sessionStorage.getItem("isAuthenticated") === "true";
 
   if (!isAuthenticated) {
-    return <Navigate to="/admin-login" />;
+    return <Navigate to="/admin" />;
   }
 
   return children;
@@ -38,7 +42,7 @@ const App = () => {
     <Provider store={store}>
       <AuthProvider>
         <Router>
-          <NavBar />
+          <Header />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<UserLogin />} />
@@ -60,10 +64,13 @@ const App = () => {
               }
             />
             <Route path="/doctors" element={<Doctors />} />
+            <Route path="/doctor/:id" element={<DoctorDetails />} />{" "}
+            {/* Новый маршрут */}
             <Route path="/services" element={<Services />} />
             <Route path="/diagnostics" element={<Diagnostic />} />
             <Route path="/promotions" element={<Offers />} />
             <Route path="/patients" element={<Patients />} />
+            <Route path="/license" element={<License />} />
             <Route path="/reviews" element={<Reviews />} />
             <Route path="/contacts" element={<Contacts />} />
           </Routes>

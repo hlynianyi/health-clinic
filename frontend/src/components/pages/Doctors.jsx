@@ -1,17 +1,9 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchDoctors } from "../../store/doctorSlice";
-import {
-  Box,
-  Typography,
-  List,
-  ListItem,
-  ListItemText,
-  Avatar,
-  Grid,
-  Button,
-} from "@mui/material";
+import { Box, Typography, Avatar, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { fetchDoctors } from "../../store/doctorSlice";
 
 const ColorButton = styled(Button)(({ theme }) => ({
   height: 32,
@@ -25,6 +17,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
 
 const Doctors = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const doctors = useSelector((state) => state.doctors.doctors);
   const status = useSelector((state) => state.doctors.status);
   const error = useSelector((state) => state.doctors.error);
@@ -55,7 +48,7 @@ const Doctors = () => {
               className="flex flex-col mb-4 p-2 w-[300px] h-[272px] border-bggray border-[2px] rounded-lg"
               key={doctor.login}
             >
-              <div className="flex flex-row mb-2 h-[130px]">
+              <div className="flex flex-row mb-0 h-[130px]">
                 <Avatar
                   src={`http://localhost:5000/${doctor.photo}`}
                   alt={doctor.name}
@@ -86,7 +79,11 @@ const Doctors = () => {
               </div>
 
               <div className="flex grow justify-center w-[100%] items-end">
-                <ColorButton className="w-[100%]" variant="contained">
+                <ColorButton
+                  onClick={() => navigate(`/doctor/${doctor._id}`)}
+                  className="w-[100%]"
+                  variant="contained"
+                >
                   Записаться онлайн
                 </ColorButton>
               </div>

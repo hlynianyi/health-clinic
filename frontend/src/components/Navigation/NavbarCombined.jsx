@@ -14,6 +14,7 @@ const MENU = [
   { label: "Диагностика", path: "/diagnostics" },
   { label: "Акции", path: "/promotions" },
   { label: "Пациентам", path: "/patients" },
+  { label: "Лицензии", path: "/license" },
   { label: "Отзывы", path: "/reviews" },
   { label: "Контакты", path: "/contacts" },
 ];
