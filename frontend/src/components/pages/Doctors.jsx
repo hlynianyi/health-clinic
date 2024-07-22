@@ -38,13 +38,13 @@ const Doctors = () => {
 
   return (
     <>
-      <h2 className="mb-6 py-2 pl-2 border-[1px] border-bggray rounded-lg bg-bggray text-black font-montserrat text-lg">
-        Список наших специалистов
+      <h2 className="flex justify-center mb-2 py-2 pl-2 border-[1px] border-bggray rounded-lg bg-bggray text-black font-montserrat text-lg">
+        НАШИ СПЕЦИАЛИСТЫ
       </h2>
-      <section className="flex flex-row flex-wrap gap-4">
+      <section className="flex flex-col justify-center items-center tablet: tablet:flex-row tablet:flex-wrap tablet:justify-start large:justify-center gap-2 large:gap-5 ">
         {doctors.map((doctor) => (
           <div
-            className="flex flex-col mb-4 p-2 w-[300px] h-[272px] border-bggray border-[2px] rounded-lg"
+            className="flex flex-col shrink mb-1 p-2 w-[350px] tablet:w-[305px] h-[272px] laptop:w-[312px] large:w-[336px] border-bggray border-[2px] rounded-lg"
             key={doctor.login}
           >
             <div className="flex flex-row mb-0 h-[130px]">
@@ -56,7 +56,7 @@ const Doctors = () => {
               />
               <div className="flex flex-col">
                 <p className="font-normal mb-3">{doctor.name}</p>
-                <p className="font-semibold text-xs text-maingreen">
+                <p className="font-semibold text-xs laptop:text-[14px] text-maingreen">
                   Врач {doctor.specialty.toLowerCase()}
                 </p>
               </div>
@@ -72,7 +72,9 @@ const Doctors = () => {
                 </p>
                 <p className="mt-1 flex justify-center items-center w-[100px] h-[32px] bg-bggray border-[1px] border-[#E5E7E3] rounded">
                   <span>Отзывы:&nbsp;</span>
-                  <span className="text-maingreen font-semibold">4</span>
+                  <span className="text-maingreen font-semibold">
+                    {doctor.reviews.length}
+                  </span>
                 </p>
               </div>
             </div>

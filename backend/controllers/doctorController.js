@@ -1,5 +1,4 @@
-// controllers/doctorController.js
-const Doctor = require('../models/Doctor');
+const Doctor = require("../models/Doctor");
 
 exports.getDoctors = async (req, res) => {
   try {
@@ -14,7 +13,7 @@ exports.getDoctorById = async (req, res) => {
   try {
     const doctor = await Doctor.findById(req.params.id);
     if (!doctor) {
-      return res.status(404).json({ message: 'Doctor not found' });
+      return res.status(404).json({ message: "Doctor not found" });
     }
     res.json(doctor);
   } catch (error) {
@@ -23,7 +22,10 @@ exports.getDoctorById = async (req, res) => {
 };
 
 exports.registerDoctor = async (req, res) => {
-  const { login, password, name, specialty, email, experience, about, photo } = req.body;
+  const { login, password, name, specialty, email, experience, about } =
+    req.body;
+  const photo = req.file ? req.file.path : "";
+
   const doctor = new Doctor({
     login,
     password,
@@ -40,5 +42,25 @@ exports.registerDoctor = async (req, res) => {
     res.status(201).json(newDoctor);
   } catch (error) {
     res.status(400).json({ message: error.message });
+  }
+};
+
+exports.addReview = async (req, res) => {
+  const { id } = req.params;
+  const { name, email, text } = req.body;
+
+  try {
+    const doctor = await Doctor.findById(id);
+    if (!doctor) {
+      return res.status(404).json({ message: "Doctor not found" });
+    }
+
+    const review = { name, email, text, date: new Date() };
+    doctor.reviews.push(review);
+    await doctor.save();
+
+    res.status(201).json(review);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };

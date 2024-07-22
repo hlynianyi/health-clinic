@@ -1,16 +1,19 @@
+
 const express = require("express");
 const {
-  registerDoctor,
   getDoctors,
-  getDoctorById
+  getDoctorById,
+  registerDoctor,
+  addReview,
 } = require("../controllers/doctorController");
 
 module.exports = (upload) => {
   const router = express.Router();
 
-  router.post("/register", upload.single("photo"), registerDoctor);
-  router.get("/:id", getDoctorById);
   router.get("/", getDoctors);
+  router.get("/:id", getDoctorById);
+  router.post("/register", upload.single("photo"), registerDoctor);
+  router.post("/:id/reviews", addReview);
 
   return router;
 };
