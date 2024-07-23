@@ -104,17 +104,16 @@ const Footer = () => {
     <footer className="py-2 px-4 tablet:px-4 tablet:py-4 laptop:px-8 desktop:px-16 large:px-64 gap-4 flex flex-col tablet:flex-row justify-between bg-bgdarkgray font-normal font-montserrat text-white text-sm">
       <section className="flex flex-row tablet:flex-col wrap justify-between">
         <div className="flex grow flex-col justify-between w-full text-lg gap-3">
-          <h2 className="w-[200px]">
-            Медицинский центр <br />
-            на Демидова
+          <h2 className="w-full tablet:w-[200px]">
+            Медицинский центр на Демидова
           </h2>
-          <div className="flex flex-row gap-2 text-base items-start">
-            <div className="flex flex-col justify-center w-[22px] pt-[14px]">
+          <div className="flex flex-row gap-2 text-base items-center justifyt-center align-center">
+            <div className="flex flex w-[22px] ">
               <img src={hours} alt="часы работы" className="" />
             </div>
-            <div className="flex flex-col">
-              <span>Пн. - Вс.</span>
-              <span>08:00 - 22:00</span>
+            <div className="flex flex-col justify-center">
+              <span>Пн.-Вс., 08:00 - 22:00</span>
+              {/* <span>08:00 - 22:00</span> */}
             </div>
           </div>
         </div>

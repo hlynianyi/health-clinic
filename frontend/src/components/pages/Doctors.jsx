@@ -41,10 +41,11 @@ const Doctors = () => {
       <h2 className="flex justify-center mb-2 py-2 pl-2 border-[1px] border-bggray rounded-lg bg-bggray text-black font-montserrat text-lg">
         НАШИ СПЕЦИАЛИСТЫ
       </h2>
-      <section className="flex flex-col justify-center items-center tablet: tablet:flex-row tablet:flex-wrap tablet:justify-start large:justify-center gap-6 desktop:gap-4 large:gap-5 ">
+      <section className="grid grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3 laptop:grid-cols-3 gap-2 place-content-between">
         {doctors.map((doctor) => (
           <div
-            className="flex flex-col shrink mb-1 p-2 w-[350px] tablet:w-[305px] h-[272px] laptop:w-[312px] large:w-[336px] border-bggray border-[2px] rounded-lg"
+            className="flex flex-col mb-1 p-2 h-[272px] border-bggray border-[2px] rounded-lg"
+            style={{ minWidth: "305px", maxWidth: "6000px" }}
             key={doctor.login}
           >
             <div className="flex flex-row mb-0 h-[130px]">
@@ -83,7 +84,7 @@ const Doctors = () => {
               <ColorButton
                 className="w-[100%]"
                 variant="contained"
-                onClick={() => navigate(`/doctors/${doctor._id}`)} // Обновленный обработчик клика
+                onClick={() => navigate(`/doctors/${doctor._id}`)}
               >
                 Подробнее
               </ColorButton>

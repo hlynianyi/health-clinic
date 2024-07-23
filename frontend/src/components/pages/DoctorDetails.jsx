@@ -52,145 +52,157 @@ const DoctorDetails = () => {
           <h2 className="flex justify-center w-full mb-2 tablet:mb-4 py-2 pl-4 rounded-lg bg-bggray text-black font-montserrat text-xl">
             {doctor.name}
           </h2>
-          <section className="flex flex-col text-base">
+          <section className="flex flex-col text-base mb-4">
             <div className="flex flex-col lg:flex-row justify-between gap-2">
-              <div className=" flex justify-center shrink-0">
-                <aside className="flex shrink-0 flex-row justify-center w-fit h-min rounded-lg bg-bggray laptop:items-center laptop:align-center p-4 mr-2 mb-2">
-                  <img
-                    className=" w-[250px] shrink-0 rounded-lg tablet:rounded-lg object-cover mix-blend-normal"
-                    src={`http://localhost:5000/${doctor.photo}`}
-                    alt={doctor.name}
-                  />
+              <div className=" flex flex-col justify-center shrink-0 laptop:flex-row laptop:w-full laptop:gap-4">
+                <aside className="flex shrink-0 flex-row justify-center w-full h-min rounded-lg bg-bggray p-1 mb-2 laptop:flex-col laptop:w-fit laptop:w-1/3 tablet:gap-2">
+                  <div className="w-2/4 p-1 laptop:w-full">
+                    <img
+                      className="shrink-0 rounded-lg tablet:rounded-lg object-contain mix-blend-normal"
+                      src={`http://localhost:5000/${doctor.photo}`}
+                      alt={doctor.name}
+                    />
+                  </div>
+                  <section className="w-2/4 flex flex-col p-1  flex justify-start gap-2  laptop:gap-2 font-semibold text-white text-[14px] tablet:text-lg laptop:w-full">
+                    <button className="bg-maingreen hover:bg-mainblue py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                      Онлайн запись
+                    </button>
+                    <button
+                      onClick={() => setShowReviewForm(!showReviewForm)}
+                      className="bg-maingreen hover:bg-mainblue  py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    >
+                      Оставить отзыв
+                    </button>
+                  </section>
                 </aside>
+                {showReviewForm && (
+                  <form
+                    className="mb-2 bg-bggray rounded-lg p-2 laptop:absolute laptop:py-4 laptop:px-12 laptop:right-14 large:right-[268px] desktop:right-24 laptop:w-1/2 large:w-2/5 laptop:shadow-xl laptop:transition-all laptop:duration-300 laptop:ease-in-out"
+                    onSubmit={handleReviewSubmit}
+                  >
+                    <div className="flex justify-between items-center mb-4">
+                      <h2 className="text-lg font-medium">Оставить отзыв:</h2>
+                      <button
+                        type="button"
+                        onClick={() => setShowReviewForm(false)}
+                        className="mr-2 laptop:mr-0 text-4xl text-gray-700 text-maingreen hover:text-bgdarkgray focus:outline-none"
+                      >
+                        &times;
+                      </button>
+                    </div>
+                    <div className="mb-4">
+                      <label
+                        className="block text-gray-700 text-sm font-semibold mb-2"
+                        htmlFor="name"
+                      >
+                        Ф.И.О:
+                      </label>
+                      <input
+                        required
+                        id="name"
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      />
+                    </div>
+                    <div className="mb-4">
+                      <label
+                        className="block text-gray-700 text-sm font-semibold mb-2"
+                        htmlFor="email"
+                      >
+                        Email:
+                      </label>
+                      <input
+                        required
+                        id="email"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      />
+                    </div>
+                    <div className="mb-2">
+                      <label
+                        className="block text-gray-700 text-sm font-semibold mb-2"
+                        htmlFor="text"
+                      >
+                        Отзыв:
+                      </label>
+                      <textarea
+                        required
+                        id="text"
+                        value={text}
+                        onChange={(e) => setText(e.target.value)}
+                        className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      ></textarea>
+                    </div>
+                    <div className="flex items-center justify-end">
+                      <button
+                        type="submit"
+                        className="bg-maingreen hover:bg-mainblue text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                      >
+                        Отправить отзыв
+                      </button>
+                    </div>
+                  </form>
+                )}
+
+                <section className="py-2 px-2 tablet:p-4 tablet:px-8 desktop:px-10 flex flex-col justify-start w-full  bg-bggray gap-2 rounded-lg laptop:w-screen">
+                  <div className="pb-2 flex border-b-[1px] border-b-mainblue">
+                    <div className="w-[140px] mr-3">
+                      <p className="font-medium">Должность</p>
+                    </div>
+                    <div className="">Врач</div>
+                  </div>
+
+                  <div className="pb-2 flex border-b-[1px] border-b-mainblue wrap">
+                    <div className="w-[140px] mr-3 shrink-0">
+                      <p className="font-medium">Специальность</p>
+                    </div>
+                    <div className="flex-wrap">
+                      <p className="">{doctor.specialty}</p>
+                    </div>
+                  </div>
+
+                  <div className="pb-2 flex border-b-[1px] border-b-mainblue wrap">
+                    <div className="w-[140px] mr-3 shrink-0">
+                      <p className="font-medium">Опыт работы</p>
+                    </div>
+                    <div className="flex-wrap">
+                      <p>{doctor.experience} лет</p>
+                    </div>
+                  </div>
+
+                  <div className="pb-2 flex border-b-[1px] border-b-mainblue wrap">
+                    <div className="w-[140px] mr-3 shrink-0">
+                      <p className="font-medium">График работы</p>
+                    </div>
+                    <div className="flex-wrap">
+                      <p>{doctor.schedule}</p>
+                    </div>
+                  </div>
+
+                  <div className="pb-2 border-b-[1px] border-b-mainblue flex wrap">
+                    <div className="flex-1 mr-3 shrink-0">
+                      <p className="font-medium w-[140px] float-left mr-3 mb-1">
+                        Образование
+                      </p>
+                      <p className="break-words">{doctor.education}</p>
+                    </div>
+                  </div>
+                  <div className="pb-2 flex wrap">
+                    <div className="flex-1 mr-3 shrink-0">
+                      <p className="font-medium w-[140px] float-left mr-3 mb-1">
+                        О специалисте
+                      </p>
+                      <p className="break-words">{doctor.about}</p>
+                    </div>
+                  </div>
+                </section>
               </div>
-              <section className="py-1 px-2 tablet:p-4 tablet:px-8 desktop:px-10 flex flex-col justify-start w-full  bg-bggray gap-2 rounded-lg">
-                <div className="pb-2 flex border-b-[1px] border-b-mainblue">
-                  <div className="w-[140px] mr-3">
-                    <p>Должность</p>
-                  </div>
-                  <div className="">Врач</div>
-                </div>
-
-                <div className="pb-2 flex border-b-[1px] border-b-mainblue wrap">
-                  <div className="w-[140px] mr-3 shrink-0">
-                    <p>Специальность</p>
-                  </div>
-                  <div className="flex flex-row flex-start gap-2 flex-wrap">
-                    <p>{doctor.specialty}</p>
-                  </div>
-                </div>
-
-                <div className="pb-2 flex border-b-[1px] border-b-mainblue wrap">
-                  <div className="w-[140px] mr-3 shrink-0">
-                    <p>Опыт работы</p>
-                  </div>
-                  <div className="flex flex-row flex-start gap-2 flex-wrap">
-                    <p>{doctor.experience} лет</p>
-                  </div>
-                </div>
-
-                <div className="pb-2 flex border-b-[1px] border-b-mainblue wrap">
-                  <div className="w-[140px] mr-3 shrink-0">
-                    <p>График работы</p>
-                  </div>
-                  <div className="flex flex-row flex-start gap-2 flex-wrap">
-                    <p>{doctor.schedule}</p>
-                  </div>
-                </div>
-
-                <div className="pb-2 flex border-b-[1px] border-b-mainblue wrap">
-                  <div className="w-[140px] mr-3 shrink-0">
-                    <p>Образование</p>
-                  </div>
-                  <div className="flex flex-row flex-start gap-2 flex-wrap">
-                    <p>{doctor.education}</p>
-                  </div>
-                </div>
-
-                <div className="pb-2 flex wrap">
-                  <div className="w-[140px] mr-3 shrink-0">
-                    <p>О специалисте</p>
-                  </div>
-                  <div className="flex flex-row flex-start gap-2 flex-wrap">
-                    <p className="mr-2 large:mr-12">{doctor.about}</p>
-                  </div>
-                </div>
-              </section>
             </div>
-            <section className="pt-4 pb-2 px-2 tablet:py-4 flex justify-between laptop:justify-end laptop:gap-4">
-              <button
-                onClick={() => setShowReviewForm(!showReviewForm)}
-                className="bg-maingreen hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              >
-                Оставить отзыв
-              </button>
-              <button className="bg-maingreen hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                Записаться на прием
-              </button>
-            </section>
-            {showReviewForm && (
-              <form
-                className="mb-4 bg-bggray rounded-lg p-6"
-                onSubmit={handleReviewSubmit}
-              >
-                <h2 className="text-2xl font-medium mb-8">Оставить отзыв:</h2>
-                <div className="mb-4">
-                  <label
-                    className="block text-gray-700 text-sm font-semibold mb-2"
-                    htmlFor="name"
-                  >
-                    Ф.И.О:
-                  </label>
-                  <input
-                    required
-                    id="name"
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label
-                    className="block text-gray-700 text-sm font-semibold mb-2"
-                    htmlFor="email"
-                  >
-                    Email:
-                  </label>
-                  <input
-                    required
-                    id="email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label
-                    className="block text-gray-700 text-sm font-semibold mb-2"
-                    htmlFor="text"
-                  >
-                    Отзыв:
-                  </label>
-                  <textarea
-                    required
-                    id="text"
-                    value={text}
-                    onChange={(e) => setText(e.target.value)}
-                    className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  ></textarea>
-                </div>
-                <div className="flex items-center justify-between">
-                  <button
-                    type="submit"
-                    className="bg-maingreen hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                  >
-                    Отправить отзыв
-                  </button>
-                </div>
-              </form>
-            )}
+
             <section className="my-2 flex flex-col">
               <h2 className="flex justify-center w-full mb-2 tablet:mb-4 py-2 pl-4 rounded-lg bg-bggray text-black font-montserrat">
                 ОТЗЫВЫ
@@ -218,7 +230,9 @@ const DoctorDetails = () => {
                     </div>
                   ))
                 ) : (
-                  <p>Нет отзывов</p>
+                  <p className="flex justify-center">
+                    У этого врача пока нет отзывов, но вы можете стать первым!
+                  </p>
                 )}
               </div>
             </section>
