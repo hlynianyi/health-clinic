@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { fetchDoctorById, submitReview } from "../../store/doctorSlice";
 import { ReviewIcon } from "../../assets/ReviewIcon";
 
 const DoctorDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -56,9 +57,9 @@ const DoctorDetails = () => {
             <div className="flex flex-col lg:flex-row justify-between gap-2">
               <div className=" flex flex-col justify-center shrink-0 laptop:flex-row laptop:w-full laptop:gap-4">
                 <aside className="flex shrink-0 flex-row justify-center w-full h-min rounded-lg bg-bggray p-1 mb-2 laptop:flex-col laptop:w-fit laptop:w-1/3 tablet:gap-2">
-                  <div className="w-2/4 p-1 laptop:w-full">
+                  <div className="w-2/4 p-1 laptop:w-full flex justify-center">
                     <img
-                      className="shrink-0 rounded-lg tablet:rounded-lg object-contain mix-blend-normal"
+                      className="min-w-[191px] shrink-0 rounded-lg tablet:rounded-lg object-contain mix-blend-normal"
                       src={`http://localhost:5000/${doctor.photo}`}
                       alt={doctor.name}
                     />

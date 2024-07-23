@@ -111,9 +111,9 @@ const CombinedNavbar = () => {
                   width: "100%",
                   left: 0,
                   right: 0,
-                  top: "0px", // Adjust if needed based on your app bar height
+                  top: "0px",
                   position: "fixed",
-                  backgroundColor: "#fff", // or any other color you prefer
+                  backgroundColor: "#fff",
                 },
               }}
               transformOrigin={{
@@ -133,7 +133,11 @@ const CombinedNavbar = () => {
               ))}
             </Menu>
           </div>
-          <ColorButton startIcon={<AssignmentIcon />} variant="">
+          <ColorButton
+            onClick={() => navigate("/booking")}
+            startIcon={<AssignmentIcon />}
+            variant=""
+          >
             {isSmallScreen ? <p>Записаться</p> : <p>Записаться онлайн</p>}
           </ColorButton>
         </div>

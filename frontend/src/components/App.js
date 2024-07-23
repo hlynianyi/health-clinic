@@ -24,6 +24,8 @@ import Contacts from "./pages/Contacts";
 import License from "./pages/License";
 import DoctorDetails from "./pages/DoctorDetails"; // Импорт нового компонента
 import { AuthProvider } from "../context/AuthContext"; // useAuth
+import Booking from "./pages/Booking/Booking";
+import BookingCalendar from "./pages/Booking/BookingCalendar";
 
 // todo: Логин докторов(UserLogin), страница для каждого доктора с возможностью брони визита
 
@@ -66,7 +68,6 @@ const App = () => {
               />
               <Route path="/doctors" element={<Doctors />} />
               <Route path="/doctors/:id" element={<DoctorDetails />} />
-              {/* Новый маршрут */}
               <Route path="/services" element={<Services />} />
               <Route path="/diagnostics" element={<Diagnostic />} />
               <Route path="/promotions" element={<Offers />} />
@@ -74,6 +75,8 @@ const App = () => {
               <Route path="/license" element={<License />} />
               <Route path="/reviews" element={<Reviews />} />
               <Route path="/contacts" element={<Contacts />} />
+              <Route path="/booking" element={<Booking />} />
+              <Route path="/booking/:id" element={<BookingCalendar />} />
             </Routes>
           </main>
 
