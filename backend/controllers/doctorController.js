@@ -23,7 +23,17 @@ exports.getDoctorById = async (req, res) => {
 };
 
 exports.registerDoctor = async (req, res) => {
-  const { login, password, name, specialty, email, experience, about, education, schedule } = req.body;
+  const {
+    login,
+    password,
+    name,
+    specialty,
+    email,
+    experience,
+    about,
+    education,
+    schedule,
+  } = req.body;
   const photo = req.file ? req.file.path : "";
 
   const doctor = new Doctor({
@@ -35,8 +45,8 @@ exports.registerDoctor = async (req, res) => {
     experience,
     about,
     photo,
-    education, // Добавлено новое поле
-    schedule, // Добавлено новое поле
+    education,
+    schedule,
   });
 
   try {
@@ -54,7 +64,7 @@ exports.addReview = async (req, res) => {
   try {
     const doctor = await Doctor.findById(id);
     if (!doctor) {
-      return res.status(404).json({ message: 'Doctor not found' });
+      return res.status(404).json({ message: "Doctor not found" });
     }
 
     const review = { name, email, text, date: new Date() };
@@ -62,6 +72,26 @@ exports.addReview = async (req, res) => {
     await doctor.save();
 
     res.status(201).json(review);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.addAppointment = async (req, res) => {
+  const { id } = req.params;
+  const { date, time } = req.body;
+
+  try {
+    const doctor = await Doctor.findById(id);
+    if (!doctor) {
+      return res.status(404).json({ message: "Doctor not found" });
+    }
+
+    const appointment = { date, time };
+    doctor.appointments.push(appointment);
+    await doctor.save();
+
+    res.status(201).json(appointment);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

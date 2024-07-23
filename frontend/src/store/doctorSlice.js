@@ -28,6 +28,17 @@ export const submitReview = createAsyncThunk(
   }
 );
 
+export const bookAppointment = createAsyncThunk(
+  "doctors/bookAppointment",
+  async ({ doctorId, date, time }) => {
+    const response = await axios.post(
+      `http://localhost:5000/api/doctors/${doctorId}/appointments`,
+      { date, time }
+    );
+    return response.data;
+  }
+);
+
 const doctorSlice = createSlice({
   name: "doctors",
   initialState: {
@@ -63,6 +74,9 @@ const doctorSlice = createSlice({
       })
       .addCase(submitReview.fulfilled, (state, action) => {
         state.selectedDoctor.reviews.push(action.payload);
+      })
+      .addCase(bookAppointment.fulfilled, (state, action) => {
+        state.selectedDoctor.appointments.push(action.payload);
       });
   },
 });

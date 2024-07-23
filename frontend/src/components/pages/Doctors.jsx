@@ -45,7 +45,7 @@ const Doctors = () => {
         {doctors.map((doctor) => (
           <div
             className="flex flex-col mb-1 p-2 h-[272px] border-bggray border-[2px] rounded-lg"
-            style={{ minWidth: "305px", maxWidth: "6000px" }}
+            style={{ minWidth: "305px", maxWidth: "600px" }}
             key={doctor.login}
           >
             <div className="flex flex-row mb-0 h-[130px]">

@@ -56,7 +56,7 @@ const DoctorDetails = () => {
           <section className="flex flex-col text-base mb-4">
             <div className="flex flex-col lg:flex-row justify-between gap-2">
               <div className=" flex flex-col justify-center shrink-0 laptop:flex-row laptop:w-full laptop:gap-4">
-                <aside className="flex shrink-0 flex-row justify-center w-full h-min rounded-lg bg-bggray p-1 mb-2 laptop:flex-col laptop:w-fit laptop:w-1/3 tablet:gap-2">
+                <aside className="flex shrink-0 flex-row justify-center w-full h-min rounded-lg bg-bggray p-1 mb-2 laptop:flex-col laptop:w-1/3 tablet:gap-2">
                   <div className="w-2/4 p-1 laptop:w-full flex justify-center">
                     <img
                       className="min-w-[191px] shrink-0 rounded-lg tablet:rounded-lg object-contain mix-blend-normal"
