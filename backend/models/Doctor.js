@@ -21,6 +21,12 @@ const doctorSchema = new mongoose.Schema({
       date: Date,
     },
   ],
+  appointments: [
+    {
+      date: { type: Date, required: true }, // Обязательно тип Date
+      time: { type: String, required: true }, // Время в формате строки
+    },
+  ],
 });
 
 // Хеширование пароля перед сохранением

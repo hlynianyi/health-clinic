@@ -81,6 +81,10 @@ exports.addAppointment = async (req, res) => {
   const { id } = req.params;
   const { date, time } = req.body;
 
+  if (!date || !time) {
+    return res.status(400).json({ message: "Date and time are required." });
+  }
+
   try {
     const doctor = await Doctor.findById(id);
     if (!doctor) {
@@ -93,6 +97,7 @@ exports.addAppointment = async (req, res) => {
 
     res.status(201).json(appointment);
   } catch (error) {
+    console.error("Error adding appointment:", error);
     res.status(500).json({ message: error.message });
   }
 };

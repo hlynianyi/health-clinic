@@ -30,20 +30,25 @@ const BookingDetails = () => {
 
   const handleTimeSelect = (time) => {
     setSelectedTime(time);
+    console.log("selected time log:", time);
+    console.log("doctor log:", doctor);
   };
 
+  //todo: fix db add
   const handleBookingSubmit = async (e) => {
     e.preventDefault();
     if (!selectedTime) {
       alert("Please select a time.");
       return;
     }
+
     const appointmentData = {
-      date: selectedDate.toDate(),
-      time: selectedTime,
+      date: selectedDate.toISOString(), // Убедитесь, что дата в ISO формате
+      time: selectedTime.format("HH:mm"), // Формат времени в строке
     };
+
     try {
-      await dispatch(bookAppointment({ doctorId: id, appointmentData }));
+      await dispatch(bookAppointment({ doctorId: id, ...appointmentData }));
       alert("Appointment booked successfully!");
     } catch (error) {
       console.error("Error booking appointment:", error);
@@ -88,10 +93,10 @@ const BookingDetails = () => {
                 <button
                   key={index}
                   onClick={() => handleTimeSelect(slot)}
-                  className={`p-2 rounded-lg ${
+                  className={`p-2 rounded-lg hover:bg-bggray  ${
                     selectedTime && selectedTime.isSame(slot)
-                      ? "bg-blue-500 text-white"
-                      : "bg-gray-200"
+                      ? "bg-maingreen text-white"
+                      : "bg-bggray"
                   } ${
                     doctor.appointments?.some(
                       (appt) =>
