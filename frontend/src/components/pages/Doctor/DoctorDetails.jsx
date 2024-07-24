@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { fetchDoctorById, submitReview } from "../../store/doctorSlice";
-import { ReviewIcon } from "../../assets/ReviewIcon";
+import { fetchDoctorById, submitReview } from "../../../store/doctorSlice";
+import { ReviewIcon } from "../../../assets/ReviewIcon";
 
 const DoctorDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

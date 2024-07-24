@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Typography, Avatar, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { fetchDoctors } from "../../store/doctorSlice";
+import { fetchDoctors } from "../../../store/doctorSlice";
 
 const ColorButton = styled(Button)(({ theme }) => ({
   height: 32,

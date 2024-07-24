@@ -7,8 +7,9 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
 import { fetchDoctorById, bookAppointment } from "../../../store/doctorSlice";
+import InputMask from "react-input-mask";
 
-dayjs.extend(localizedFormat); // Подключаем плагин
+dayjs.extend(localizedFormat);
 dayjs.locale("ru");
 
 const BookingDetails = () => {
@@ -19,6 +20,7 @@ const BookingDetails = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [errors, setErrors] = useState({ name: "", email: "", phone: "" });
 
   const doctor = useSelector((state) => state.doctors.selectedDoctor);
   const status = useSelector((state) => state.doctors.status);
@@ -39,39 +41,66 @@ const BookingDetails = () => {
     setSelectedTime(time);
   };
 
+  const validateForm = () => {
+    let valid = true;
+    let errors = { name: "", email: "", phone: "" };
+
+    if (!/^[a-zA-Zа-яА-Я\s]+$/.test(name)) {
+      errors.name = "Имя должно содержать только буквы.";
+      valid = false;
+    }
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      errors.email = "Введите корректный адрес электронной почты.";
+      valid = false;
+    }
+    if (!/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/.test(phone)) {
+      errors.phone = "Введите корректный номер телефона.";
+      valid = false;
+    }
+
+    setErrors(errors);
+    return valid;
+  };
+
   const handleBookingSubmit = async (e) => {
     e.preventDefault();
     if (!selectedTime) {
-      alert("Please select a time.");
+      alert("Пожалуйста, выберите время.");
+      return;
+    }
+    if (!validateForm()) {
       return;
     }
 
     const appointmentData = {
       date: selectedDate.toISOString(),
       time: selectedTime.format("HH:mm"),
-      name, // Добавляем имя
-      email, // Добавляем email
-      phone, // Добавляем телефон
+      name,
+      email,
+      phone,
     };
-    console.log("appointmentData :>> ", appointmentData);
+
     try {
       await dispatch(bookAppointment({ doctorId: id, ...appointmentData }));
-      alert("Appointment booked successfully!");
+      //todo: возможно поменять сообщение
+      alert(
+        "Вы оставили заявку на прием, наш персонал с вами свяжется в ближайшее время!"
+      );
     } catch (error) {
-      console.error("Error booking appointment:", error);
+      console.error("Ошибка при записи на прием:", error);
     }
   };
 
   if (status === "loading") {
-    return <p>Loading...</p>;
+    return <p>Загрузка...</p>;
   }
 
   if (status === "failed") {
-    return <p>Error: {error}</p>;
+    return <p>Ошибка: {error}</p>;
   }
 
-  const startTime = dayjs().hour(8).minute(0); // Начало приема
-  const endTime = dayjs().hour(17).minute(0); // Конец приема
+  const startTime = dayjs().hour(8).minute(0);
+  const endTime = dayjs().hour(17).minute(0);
   const timeSlots = [];
   let currentTime = startTime;
 
@@ -131,7 +160,7 @@ const BookingDetails = () => {
             <section className="py-6">
               {selectedTime ? (
                 <div className="flex justify-center">
-                  <p className=" pb-2 font-medium">
+                  <p className="pb-2 font-medium">
                     Выбранное вами время{" - "}
                     <span className="font-bold">
                       {dayjs(selectedDate).format("D MMMM")}, {"  "}
@@ -140,7 +169,6 @@ const BookingDetails = () => {
                       {selectedTime.format("HH:mm")}
                     </span>
                   </p>
-                  <p></p>
                 </div>
               ) : (
                 <p className="flex justify-center font-medium">
@@ -149,10 +177,8 @@ const BookingDetails = () => {
               )}
             </section>
             <section className="flex flex-col gap-2">
-              <h3 className="pb-2 font-medium ">
-                Заполните контактные данные:
-              </h3>
-              <div className="mb-4 ">
+              <h3 className="pb-2 font-medium">Заполните контактные данные:</h3>
+              <div className="mb-4">
                 <input
                   required
                   id="name"
@@ -162,28 +188,42 @@ const BookingDetails = () => {
                   onChange={(e) => setName(e.target.value)}
                   className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
+                {errors.name && (
+                  <p className="text-red-500 text-sm">{errors.name}</p>
+                )}
               </div>
               <div className="mb-4">
                 <input
                   required
                   id="email"
-                  type="text"
+                  type="email"
                   placeholder="Электронная почта"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
+                {errors.email && (
+                  <p className="text-red-500 text-sm">{errors.email}</p>
+                )}
               </div>
               <div className="mb-4">
-                <input
-                  required
-                  id="phone"
-                  type="text"
-                  placeholder="Телефон"
+                <InputMask
+                  mask="+7 (999) 999-99-99"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                />
+                  required
+                >
+                  {() => (
+                    <input
+                      type="text"
+                      placeholder="Телефон"
+                      className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    />
+                  )}
+                </InputMask>
+                {errors.phone && (
+                  <p className="text-red-500 text-sm">{errors.phone}</p>
+                )}
               </div>
             </section>
             <button

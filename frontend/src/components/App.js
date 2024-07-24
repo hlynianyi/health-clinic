@@ -13,7 +13,7 @@ import UserLogin from "./pages/UserLogin";
 import AdminLogin from "./Admin/AdminLogin";
 import Dashboard from "./pages/Admin/Dashboard";
 import RegisterDoctor from "./pages/Admin/RegisterDoctor";
-import Doctors from "./pages/Doctors"; // Импортируем компонент Doctors
+import Doctors from "./pages/Doctor/Doctors"; // Импортируем компонент Doctors
 import Footer from "./Navigation/Footer";
 import Services from "./pages/Services";
 import Diagnostic from "./pages/Diagnostic";
@@ -22,7 +22,7 @@ import Patients from "./pages/Patients";
 import Reviews from "./pages/Reviews";
 import Contacts from "./pages/Contacts";
 import License from "./pages/License";
-import DoctorDetails from "./pages/DoctorDetails"; // Импорт нового компонента
+import DoctorDetails from "./pages/Doctor/DoctorDetails"; // Импорт нового компонента
 import { AuthProvider } from "../context/AuthContext"; // useAuth
 import Booking from "./pages/Booking/Booking";
 import BookingDetails from "./pages/Booking/BookingDetails";
