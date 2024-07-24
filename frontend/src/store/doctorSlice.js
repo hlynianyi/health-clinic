@@ -30,10 +30,10 @@ export const submitReview = createAsyncThunk(
 
 export const bookAppointment = createAsyncThunk(
   "doctors/bookAppointment",
-  async ({ doctorId, date, time }) => {
+  async ({ doctorId, date, time, phone, email, name }) => {
     const response = await axios.post(
       `http://localhost:5000/api/doctors/${doctorId}/appointments`,
-      { date, time }
+      { date, time, phone, email, name }
     );
     return response.data;
   }

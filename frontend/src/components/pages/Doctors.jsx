@@ -38,7 +38,7 @@ const Doctors = () => {
 
   return (
     <>
-      <h2 className="flex justify-center mb-2 py-2 pl-2 border-[1px] border-bggray rounded-lg bg-bggray text-black font-montserrat text-lg">
+      <h2 className="flex justify-center  my-2 py-2 pl-2 border-[1px] border-bggray rounded-lg bg-bggray text-black font-montserrat text-lg">
         НАШИ СПЕЦИАЛИСТЫ
       </h2>
       <section className="grid grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3 laptop:grid-cols-3 gap-2 place-content-between">

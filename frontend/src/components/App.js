@@ -45,7 +45,7 @@ const App = () => {
       <AuthProvider>
         <Router>
           <Header />
-          <main className="flex flex-col grow tablet:px-4 tablet:pt-4 tablet laptop:px-8 desktop:px-16 large:px-64 font-montserrat text-base">
+          <main className="flex flex-col grow px-1 tablet:px-4 tablet:pt-0 tablet laptop:px-8 desktop:px-16 large:px-64 font-montserrat text-base">
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/login" element={<UserLogin />} />

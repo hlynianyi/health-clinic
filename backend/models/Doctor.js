@@ -25,6 +25,9 @@ const doctorSchema = new mongoose.Schema({
     {
       date: { type: Date, required: true }, // Обязательно тип Date
       time: { type: String, required: true }, // Время в формате строки
+      name: { type: String, required: true },
+      email: { type: String, required: true },
+      phone: { type: String, required: true },
     },
   ],
 });
