@@ -40,37 +40,37 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="flex grow items-center justify-center border-2">
-      <div className="container mx-auto mt-6 grow">
-        <h1 className="flex justify-center text-lg">Администратор?</h1>
-        <div className="flex justify-center">
-          <form className="flex flex-col gap-4 mt-6" onSubmit={handleSubmit}>
-            <input
-              className="p-2 border-2 rounded border-sky-700"
-              type="text"
-              name="username"
-              value={credentials.username}
-              onChange={handleChange}
-              placeholder="Логин"
-            />
-            <input
-              className="p-2 border-2 rounded border-sky-700"
-              type="password"
-              name="password"
-              value={credentials.password}
-              onChange={handleChange}
-              placeholder="Пароль"
-            />
-            <button
-              className="p-2 border-2 rounded border-sky-700"
-              type="submit"
-            >
-              Войти
-            </button>
-          </form>
-        </div>
+    <>
+      <h1 className="mt-4 mb-10 p-2 flex justify-center text-xl rounded-lg bg-bggray">
+        Администратор?
+      </h1>
+      <div className="flex justify-center mt-6">
+        <form className="flex flex-col gap-4 mt-6" onSubmit={handleSubmit}>
+          <input
+            className="p-2 border-2 rounded border-bgdarkgray px-6"
+            type="text"
+            name="username"
+            value={credentials.username}
+            onChange={handleChange}
+            placeholder="Логин"
+          />
+          <input
+            className="p-2 border-2 rounded border-bgdarkgray px-6"
+            type="password"
+            name="password"
+            value={credentials.password}
+            onChange={handleChange}
+            placeholder="Пароль"
+          />
+          <button
+            className="p-2 mt-6 border-2 rounded border-bgdarkgray px-6"
+            type="submit"
+          >
+            Войти
+          </button>
+        </form>
       </div>
-    </div>
+    </>
   );
 };
 
