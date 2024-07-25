@@ -34,7 +34,7 @@ const Reviews = () => {
         phone,
         text,
       });
-      dispatch(fetchReviews());
+      dispatch(fetchReviews()); // Обновляем отзывы после добавления нового
       setName("");
       setEmail("");
       setPhone("");

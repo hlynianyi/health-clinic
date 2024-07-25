@@ -1,27 +1,67 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
 
 const ManageReviews = () => {
   const [reviews, setReviews] = useState([]);
-  const navigate = useNavigate();
-  console.log(reviews);
+  const [selectedReview, setSelectedReview] = useState(null);
+  const [openEdit, setOpenEdit] = useState(false);
+
   useEffect(() => {
-    const fetchReviews = async () => {
-      const response = await axios.get("http://localhost:5000/api/reviews");
-      setReviews(response.data);
-    };
     fetchReviews();
   }, []);
 
-  const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:5000/api/reviews/${id}`);
-    setReviews(reviews.filter((review) => review._id !== id));
+  const fetchReviews = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/reviews");
+      setReviews(response.data);
+    } catch (error) {
+      console.error("Error fetching reviews:", error);
+    }
   };
 
-  const handleEdit = (id) => {
-    navigate(`/edit-review/${id}`);
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/reviews/${id}`);
+      fetchReviews(); // Обновляем список отзывов после удаления
+    } catch (error) {
+      console.error("Error deleting review:", error);
+    }
+  };
+
+  const handleEdit = (review) => {
+    setSelectedReview(review);
+    setOpenEdit(true);
+  };
+
+  const handleCloseEdit = () => {
+    setOpenEdit(false);
+    setSelectedReview(null);
+  };
+
+  const handleSaveReview = async () => {
+    try {
+      await axios.put(
+        `http://localhost:5000/api/reviews/${selectedReview._id}`,
+        selectedReview
+      );
+      fetchReviews(); // Обновляем список отзывов после редактирования
+      handleCloseEdit();
+    } catch (error) {
+      console.error("Error updating review:", error);
+    }
+  };
+
+  const handleReviewInputChange = (e) => {
+    const { name, value } = e.target;
+    setSelectedReview({ ...selectedReview, [name]: value });
   };
 
   return (
@@ -32,7 +72,7 @@ const ManageReviews = () => {
       <ul className="mt-8 flex flex-col gap-2">
         {reviews.map((review) => (
           <li
-            className=" border-b-[1px] border-b-mainblue py-2"
+            className="border-b-[1px] border-b-mainblue py-2"
             key={review._id}
           >
             <div className="flex flex-col gap-2">
@@ -66,7 +106,7 @@ const ManageReviews = () => {
                     color: "#FFFFFF",
                   },
                 }}
-                onClick={() => handleEdit(review._id)}
+                onClick={() => handleEdit(review)}
               >
                 Редактировать
               </Button>
@@ -88,6 +128,61 @@ const ManageReviews = () => {
           </li>
         ))}
       </ul>
+
+      <Dialog open={openEdit} onClose={handleCloseEdit} maxWidth="md" fullWidth>
+        <DialogTitle>Редактировать Отзыв</DialogTitle>
+        <DialogContent>
+          <div className="flex flex-col my-4">
+            <TextField
+              required
+              id="name"
+              label="Имя:"
+              name="name"
+              value={selectedReview?.name || ""}
+              onChange={handleReviewInputChange}
+              style={{ width: "100%", marginBottom: "16px" }}
+            />
+            <TextField
+              required
+              id="email"
+              label="Email:"
+              type="email"
+              name="email"
+              value={selectedReview?.email || ""}
+              onChange={handleReviewInputChange}
+              style={{ width: "100%", marginBottom: "16px" }}
+            />
+            <TextField
+              required
+              id="phone"
+              label="Телефон:"
+              name="phone"
+              value={selectedReview?.phone || ""}
+              onChange={handleReviewInputChange}
+              style={{ width: "100%", marginBottom: "16px" }}
+            />
+            <TextField
+              required
+              id="text"
+              label="Текст отзыва:"
+              name="text"
+              value={selectedReview?.text || ""}
+              onChange={handleReviewInputChange}
+              style={{ width: "100%", marginBottom: "16px" }}
+              multiline
+              rows={4}
+            />
+          </div>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseEdit} color="primary">
+            Отмена
+          </Button>
+          <Button onClick={handleSaveReview} color="primary">
+            Сохранить
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
