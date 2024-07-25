@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import { fetchDoctors } from "../../../store/doctorSlice";
 import {
-  Typography,
   Box,
   TextField,
   Button,

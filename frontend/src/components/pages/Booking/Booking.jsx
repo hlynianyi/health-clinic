@@ -38,7 +38,7 @@ const Booking = () => {
           >
             <div className="w-1/2">
               <img
-                className="aspect-square  rounded-lg"
+                className="rounded-lg object-cover h-full"
                 src={`http://localhost:5000/${doctor.photo}`}
                 alt={doctor.name}
                 variant="rounded"

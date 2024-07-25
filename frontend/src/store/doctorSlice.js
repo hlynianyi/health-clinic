@@ -47,7 +47,13 @@ const doctorSlice = createSlice({
     status: "idle",
     error: null,
   },
-  reducers: {},
+  reducers: {
+    removeDoctor: (state, action) => {
+      state.doctors = state.doctors.filter(
+        (doctor) => doctor._id !== action.payload
+      );
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchDoctors.pending, (state) => {
@@ -81,4 +87,5 @@ const doctorSlice = createSlice({
   },
 });
 
+export const { removeDoctor } = doctorSlice.actions;
 export default doctorSlice.reducer;
