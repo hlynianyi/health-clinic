@@ -26,10 +26,10 @@ const Dashboard = () => {
           Зарегистрировать доктора
         </Button>
         <Button variant="contained" onClick={() => navigate("/manage-doctors")}>
-          Управлять докторами
+          Управлять базой докторов
         </Button>
         <Button variant="contained" onClick={() => navigate("/manage-reviews")}>
-          Управлять отзывами о сайте
+          Управлять отзывами о клинике
         </Button>
         <Button variant="contained" color="secondary" onClick={handleLogout}>
           Выйти

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Button, IconButton } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -19,11 +19,20 @@ const MENU = [
 const NavbarLower = () => {
   const [currentActiveTab, setCurrentActiveTab] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
+  useEffect(() => {
+    const found = MENU.find(item => item.path === location.pathname);
+    if (found) {
+      setCurrentActiveTab(found.path);
+    } else {
+      setCurrentActiveTab("");
+    }
+  }, [location]);
+
   const handleNavigation = (path) => {
-    setCurrentActiveTab(path);
     navigate(path);
   };
 
@@ -57,7 +66,7 @@ const NavbarLower = () => {
               sx={{
                 color: "white",
                 backgroundColor:
-                  currentActiveTab === item.path ? "#FFA500" : "transparent", // bg-red -> #FF0000
+                  currentActiveTab === item.path ? "#FFA500" : "transparent",
                 "&:hover": {
                   backgroundColor: "#FFFF",
                   color: "#28926E",

@@ -8,20 +8,24 @@ import {
   DialogContent,
   DialogTitle,
 } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { fetchReviews } from "../../../store/reviewSlice";
 
 const ManageReviews = () => {
   const [reviews, setReviews] = useState([]);
   const [selectedReview, setSelectedReview] = useState(null);
   const [openEdit, setOpenEdit] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchReviews();
+    fetchReviewsData();
   }, []);
 
-  const fetchReviews = async () => {
+  const fetchReviewsData = async () => {
     try {
       const response = await axios.get("http://localhost:5000/api/reviews");
       setReviews(response.data);
+      dispatch(fetchReviews()); // Обновляем состояние в Redux
     } catch (error) {
       console.error("Error fetching reviews:", error);
     }
@@ -30,7 +34,7 @@ const ManageReviews = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:5000/api/reviews/${id}`);
-      fetchReviews(); // Обновляем список отзывов после удаления
+      fetchReviewsData(); // Обновляем список отзывов после удаления
     } catch (error) {
       console.error("Error deleting review:", error);
     }
@@ -52,7 +56,7 @@ const ManageReviews = () => {
         `http://localhost:5000/api/reviews/${selectedReview._id}`,
         selectedReview
       );
-      fetchReviews(); // Обновляем список отзывов после редактирования
+      fetchReviewsData(); // Обновляем список отзывов после редактирования
       handleCloseEdit();
     } catch (error) {
       console.error("Error updating review:", error);
@@ -67,7 +71,7 @@ const ManageReviews = () => {
   return (
     <div>
       <h2 className="flex justify-center w-full  my-2 tablet:mb-4 py-2 pl-4 rounded-lg bg-bggray text-black font-montserrat text-xl">
-        Панель управления отзывами о сайте
+        Панель управления отзывами о клинике
       </h2>
       <ul className="mt-8 flex flex-col gap-2">
         {reviews.map((review) => (
