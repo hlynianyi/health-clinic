@@ -31,6 +31,12 @@ const Dashboard = () => {
         <Button variant="contained" onClick={() => navigate("/manage-reviews")}>
           Управлять отзывами о клинике
         </Button>
+        <Button
+          variant="contained"
+          onClick={() => navigate("/manage-licenses")}
+        >
+          Управлять лицензиями
+        </Button>
         <Button variant="contained" color="secondary" onClick={handleLogout}>
           Выйти
         </Button>

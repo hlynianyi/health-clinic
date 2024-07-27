@@ -23,11 +23,12 @@ import Reviews from "./pages/Reviews";
 import Contacts from "./pages/Contacts";
 import License from "./pages/License";
 import DoctorDetails from "./pages/Doctor/DoctorDetails"; // Импорт нового компонента
-import { AuthProvider } from "../context/AuthContext"; // useAuth
 import Booking from "./pages/Booking/Booking";
 import BookingDetails from "./pages/Booking/BookingDetails";
 import ManageReviews from "./pages/Admin/ManageReviews";
 import ManageDoctors from "./pages/Admin/ManageDoctors";
+import ManageLicenses from "./pages/Admin/ManageLicenses";
+import { AuthProvider } from "../context/AuthContext"; // useAuth
 
 // todo: Логин докторов(UserLogin), страница для каждого доктора с возможностью брони визита
 
@@ -81,6 +82,14 @@ const App = () => {
                 element={
                   <ProtectedRoute adminOnly={true}>
                     <ManageReviews />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/manage-licenses"
+                element={
+                  <ProtectedRoute adminOnly={true}>
+                    <ManageLicenses />
                   </ProtectedRoute>
                 }
               />

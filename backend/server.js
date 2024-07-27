@@ -3,12 +3,13 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const path = require("path");
+const multer = require("multer");
+const bodyParser = require("body-parser");
 const doctorRoutes = require("./routes/doctorRoutes");
 const appointmentRoutes = require("./routes/appointmentRoutes");
 const userRoutes = require("./routes/userRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
-const multer = require("multer");
-const bodyParser = require("body-parser");
+const licenseRoutes = require("./routes/licenseRoutes");
 
 dotenv.config();
 
@@ -37,6 +38,7 @@ app.use("/api/doctors", doctorRoutes(upload));
 app.use("/api/appointments", appointmentRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/reviews", reviewRoutes);
+app.use("/api/licenses", licenseRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
