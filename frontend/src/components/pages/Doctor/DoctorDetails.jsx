@@ -7,7 +7,7 @@ import { ReviewIcon } from "../../../assets/ReviewIcon";
 const DoctorDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -65,7 +65,10 @@ const DoctorDetails = () => {
                     />
                   </div>
                   <section className="w-2/4 flex flex-col p-1  flex justify-start gap-2  laptop:gap-2 font-semibold text-white text-[14px] tablet:text-lg laptop:w-full">
-                    <button className="bg-maingreen hover:bg-mainblue py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    <button
+                      className="bg-maingreen hover:bg-mainblue py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                      onClick={() => navigate(`/booking/${id}`)}
+                    >
                       Онлайн запись
                     </button>
                     <button
