@@ -83,8 +83,9 @@ const SmallReviews = () => {
         keyBoardControl={true}
         customTransition="all .5"
         transitionDuration={500}
+        removeArrowOnDeviceType={["tablet", "mobile", "desktop"]}
         containerClass="carousel-container"
-        customDot={<CustomDot />} // использование кастомного компонента для dots
+        customDot={<CustomDot />}
         dotListClass="custom-dot-list-style"
         itemClass="carousel-item-padding-40-px"
         showDots
@@ -99,7 +100,7 @@ const SmallReviews = () => {
                 <img
                   src={review.avatar}
                   alt="avatar"
-                  className="w-[50px] h-[50px] rounded-full mb-2"
+                  className="w-[50px] h-[50px] rounded-full mb-2 mt-1"
                 />
                 <div>
                   <h3 className="font-medium text-lg">{review.name}</h3>
