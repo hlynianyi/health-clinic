@@ -2,12 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { fetchDoctors } from "../../../store/doctorSlice";
-import {
-  Box,
-  TextField,
-  Button,
-  TextareaAutosize,
-} from "@mui/material";
+import { Box, TextField, Button, TextareaAutosize } from "@mui/material";
 
 const RegisterDoctor = () => {
   const dispatch = useDispatch();

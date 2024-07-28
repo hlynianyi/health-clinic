@@ -13,21 +13,43 @@ exports.getLicenses = async (req, res) => {
 };
 
 exports.addLicense = async (req, res) => {
-  const { title } = req.body;
-  const imagePath = req.file.path;
-
-  const newLicense = new License({
-    title,
-    imagePath,
-  });
-
   try {
+    if (!req.file) {
+      return res.status(400).json({ message: "No file uploaded" });
+    }
+
+    const { title } = req.body;
+    const imagePath = req.file.path;
+
+    const newLicense = new License({
+      title,
+      imagePath,
+    });
+
     const savedLicense = await newLicense.save();
     res.status(201).json(savedLicense);
   } catch (error) {
+    console.error("Error adding license:", error);
     res.status(400).json({ message: error.message });
   }
 };
+
+// exports.addLicense = async (req, res) => {
+//   const { title } = req.body;
+//   const imagePath = req.file.path;
+
+//   const newLicense = new License({
+//     title,
+//     imagePath,
+//   });
+
+//   try {
+//     const savedLicense = await newLicense.save();
+//     res.status(201).json(savedLicense);
+//   } catch (error) {
+//     res.status(400).json({ message: error.message });
+//   }
+// };
 
 exports.deleteLicense = async (req, res) => {
   try {
