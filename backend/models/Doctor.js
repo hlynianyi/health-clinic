@@ -12,7 +12,10 @@ const doctorSchema = new mongoose.Schema({
   about: { type: String },
   photo: { type: String },
   education: { type: String }, // Новое поле для образования
-  schedule: { type: String }, // Новое поле для графика работы
+  schedule: {
+    days: { type: [String], required: true },
+    hours: { type: [Number], required: true }, // [начало, конец]
+  },
   reviews: [
     {
       name: String,

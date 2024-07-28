@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 import { useAuth } from "../../../context/AuthContext";
 
 const Dashboard = () => {
-  const { isAuthenticated, logout } = useAuth();
+  const { logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {

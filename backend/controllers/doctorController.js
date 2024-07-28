@@ -37,20 +37,21 @@ exports.registerDoctor = async (req, res) => {
   } = req.body;
   const photo = req.file ? req.file.path : "";
 
-  const doctor = new Doctor({
-    login,
-    password,
-    name,
-    specialty,
-    email,
-    experience,
-    about,
-    photo,
-    education,
-    schedule,
-  });
-
   try {
+    const parsedSchedule = JSON.parse(schedule); // парсим строку JSON в объект
+    const doctor = new Doctor({
+      login,
+      password,
+      name,
+      specialty,
+      email,
+      experience,
+      about,
+      photo,
+      education,
+      schedule: parsedSchedule,
+    });
+
     const newDoctor = await doctor.save();
     res.status(201).json(newDoctor);
   } catch (error) {
@@ -101,7 +102,12 @@ exports.addAppointment = async (req, res) => {
 // UPDATE
 exports.updateDoctor = async (req, res) => {
   try {
-    const doctor = await Doctor.findByIdAndUpdate(req.params.id, req.body, {
+    const updatedData = { ...req.body };
+    console.log("updatedData object schedule?:>> ", updatedData);
+    // if (updatedData.schedule) {
+    //   updatedData.schedule = JSON.parse(updatedData.schedule);
+    // }
+    const doctor = await Doctor.findByIdAndUpdate(req.params.id, updatedData, {
       new: true,
     });
     if (!doctor) {

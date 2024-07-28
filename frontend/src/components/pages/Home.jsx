@@ -1,7 +1,7 @@
 import React from "react";
 
 const Home = () => {
-  return <section className="flex grow"></section>;
+  return <></>;
 };
 
 export default Home;

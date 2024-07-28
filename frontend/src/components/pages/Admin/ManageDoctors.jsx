@@ -1,18 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {
-  Button,
-  TextField,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from "@mui/material";
+import { Button } from "@mui/material";
+import EditDoctorDialog from "../../subcomponents/EditDoctorModal";
+import ManageReviewsDialog from "../../subcomponents/EditReviewModal";
 
 const ManageDoctors = () => {
   const [doctors, setDoctors] = useState([]);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
-  const [selectedReview, setSelectedReview] = useState(null);
   const [openEdit, setOpenEdit] = useState(false);
   const [openReviews, setOpenReviews] = useState(false);
 
@@ -39,13 +33,17 @@ const ManageDoctors = () => {
   };
 
   const handleEdit = (doctor) => {
-    setSelectedDoctor(doctor);
+    setSelectedDoctor({
+      ...doctor,
+      startHour: doctor.schedule?.hours[0] || 8,
+      endHour: doctor.schedule?.hours[1] || 16,
+      days: doctor.schedule?.days || [],
+    });
     setOpenEdit(true);
   };
 
   const handleManageReviews = (doctor) => {
     setSelectedDoctor(doctor);
-    setSelectedReview(null);
     setOpenReviews(true);
   };
 
@@ -57,14 +55,21 @@ const ManageDoctors = () => {
   const handleCloseReviews = () => {
     setOpenReviews(false);
     setSelectedDoctor(null);
-    setSelectedReview(null);
   };
 
   const handleSaveDoctor = async () => {
     try {
+      const { days, startHour, endHour, ...rest } = selectedDoctor;
+      const updatedDoctor = {
+        ...rest,
+        schedule: {
+          days,
+          hours: [startHour, endHour],
+        },
+      };
       await axios.put(
         `http://localhost:5000/api/doctors/${selectedDoctor._id}`,
-        selectedDoctor
+        updatedDoctor
       );
       fetchDoctors();
       handleCloseEdit();
@@ -73,19 +78,8 @@ const ManageDoctors = () => {
     }
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setSelectedDoctor({ ...selectedDoctor, [name]: value });
-  };
-
-  const handleReviewInputChange = (e, reviewId) => {
-    const { name, value } = e.target;
-    setSelectedDoctor((prevDoctor) => ({
-      ...prevDoctor,
-      reviews: prevDoctor.reviews.map((review) =>
-        review._id === reviewId ? { ...review, [name]: value } : review
-      ),
-    }));
+  const handleReviewInputChange = (updatedDoctor) => {
+    setSelectedDoctor(updatedDoctor);
   };
 
   const handleSaveReview = async (reviewId) => {
@@ -95,17 +89,23 @@ const ManageDoctors = () => {
         `http://localhost:5000/api/doctors/${selectedDoctor._id}/reviews/${reviewId}`,
         { ...review }
       );
-      setSelectedReview(null);
+      setSelectedDoctor((prevDoctor) => ({
+        ...prevDoctor,
+        reviews: prevDoctor.reviews.map((r) =>
+          r._id === reviewId ? { ...review } : r
+        ),
+      }));
+      handleCloseReviews();
     } catch (error) {
       console.error("Error updating review:", error);
     }
   };
+
   const handleDeleteReview = async (reviewId) => {
     try {
       await axios.delete(
         `http://localhost:5000/api/doctors/${selectedDoctor._id}/reviews/${reviewId}`
       );
-      // Обновляем локальное состояние selectedDoctor.reviews
       setSelectedDoctor((prevDoctor) => ({
         ...prevDoctor,
         reviews: prevDoctor.reviews.filter((review) => review._id !== reviewId),
@@ -117,7 +117,7 @@ const ManageDoctors = () => {
 
   return (
     <div>
-      <h2 className="flex justify-center w-full  my-2 tablet:mb-4 py-2 pl-4 rounded-lg bg-bggray text-black font-montserrat text-xl">
+      <h2 className="flex justify-center w-full my-2 tablet:mb-4 py-2 pl-4 rounded-lg bg-bggray text-black font-montserrat text-xl">
         Панель управления докторами
       </h2>
       <ul className="mt-8 flex flex-col gap-2">
@@ -177,194 +177,22 @@ const ManageDoctors = () => {
         ))}
       </ul>
 
-      <Dialog open={openEdit} onClose={handleCloseEdit} maxWidth="md" fullWidth>
-        <DialogTitle>Редактировать Доктора</DialogTitle>
-        <DialogContent>
-          <div className="flex flex-col my-4">
-            <TextField
-              required
-              id="login"
-              label="Логин:"
-              name="login"
-              value={selectedDoctor?.login || ""}
-              onChange={handleInputChange}
-              style={{ width: "100%", marginBottom: "16px" }}
-            />
-            <TextField
-              required
-              id="password"
-              label="Пароль:"
-              type="password"
-              name="password"
-              value={selectedDoctor?.password || ""}
-              onChange={handleInputChange}
-              style={{ width: "100%", marginBottom: "16px" }}
-            />
-            <TextField
-              required
-              id="email"
-              label="Email:"
-              type="email"
-              name="email"
-              value={selectedDoctor?.email || ""}
-              onChange={handleInputChange}
-              style={{ width: "100%", marginBottom: "16px" }}
-            />
-            <TextField
-              required
-              id="name"
-              label="Ф.И.О:"
-              name="name"
-              value={selectedDoctor?.name || ""}
-              onChange={handleInputChange}
-              style={{ width: "100%", marginBottom: "16px" }}
-              variant="filled"
-            />
-            <TextField
-              required
-              id="specialty"
-              label="Специальность:"
-              name="specialty"
-              value={selectedDoctor?.specialty || ""}
-              onChange={handleInputChange}
-              style={{ width: "100%", marginBottom: "16px" }}
-              variant="filled"
-            />
-            <TextField
-              id="experience"
-              label="Опыт работы:"
-              type="number"
-              name="experience"
-              value={selectedDoctor?.experience || ""}
-              onChange={handleInputChange}
-              style={{ width: "100%", marginBottom: "16px" }}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="filled"
-            />
-            <TextField
-              id="education"
-              label="Образование:"
-              name="education"
-              value={selectedDoctor?.education || ""}
-              onChange={handleInputChange}
-              style={{ width: "100%", marginBottom: "16px" }}
-              variant="filled"
-            />
-            <TextField
-              id="schedule"
-              label="График работы:"
-              name="schedule"
-              value={selectedDoctor?.schedule || ""}
-              onChange={handleInputChange}
-              style={{ width: "100%", marginBottom: "16px" }}
-              variant="filled"
-            />
-            <TextField
-              id="about"
-              label="О специалисте:"
-              name="about"
-              value={selectedDoctor?.about || ""}
-              onChange={handleInputChange}
-              style={{
-                width: "100%",
-                marginBottom: "16px",
-              }}
-              variant="filled"
-              multiline
-              rows={4}
-            />
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) =>
-                setSelectedDoctor({
-                  ...selectedDoctor,
-                  photo: e.target.files[0],
-                })
-              }
-              style={{ marginTop: "1rem" }}
-            />
-          </div>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseEdit} color="primary">
-            Отмена
-          </Button>
-          <Button onClick={handleSaveDoctor} color="primary">
-            Сохранить
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <EditDoctorDialog
+        open={openEdit}
+        onClose={handleCloseEdit}
+        doctor={selectedDoctor}
+        onChange={handleReviewInputChange}
+        onSave={handleSaveDoctor}
+      />
 
-      <Dialog
+      <ManageReviewsDialog
         open={openReviews}
         onClose={handleCloseReviews}
-        maxWidth="md"
-        fullWidth
-      >
-        <DialogTitle>
-          Управление отзывами{" "}
-          {selectedDoctor ? <>{selectedDoctor.name}</> : <>Не выбран доктор</>}
-        </DialogTitle>
-        <DialogContent>
-          {selectedDoctor?.reviews?.map((review) => (
-            <div key={review._id} className="mb-4">
-              <TextField
-                label="Имя"
-                value={review.name}
-                onChange={(e) => handleReviewInputChange(e, review._id)}
-                name="name"
-                fullWidth
-                margin="normal"
-                variant="outlined"
-              />
-              <TextField
-                label="Email"
-                value={review.email}
-                onChange={(e) => handleReviewInputChange(e, review._id)}
-                name="email"
-                fullWidth
-                margin="normal"
-                variant="outlined"
-              />
-              <TextField
-                label="Отзыв"
-                value={review.text}
-                onChange={(e) => handleReviewInputChange(e, review._id)}
-                name="text"
-                fullWidth
-                margin="normal"
-                multiline
-                rows={4}
-                variant="outlined"
-              />
-              <div className="flex justify-end gap-2 mt-2">
-                <Button
-                  onClick={() => handleSaveReview(review._id)}
-                  variant="contained"
-                  color="primary"
-                >
-                  Сохранить
-                </Button>
-                <Button
-                  onClick={() => handleDeleteReview(review._id)}
-                  variant="contained"
-                  color="secondary"
-                >
-                  Удалить
-                </Button>
-              </div>
-            </div>
-          ))}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseReviews} color="primary">
-            Закрыть
-          </Button>
-        </DialogActions>
-      </Dialog>
+        doctor={selectedDoctor}
+        onChange={handleReviewInputChange}
+        onSaveReview={handleSaveReview}
+        onDeleteReview={handleDeleteReview}
+      />
     </div>
   );
 };

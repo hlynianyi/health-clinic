@@ -7,7 +7,7 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
 import { fetchDoctorById, bookAppointment } from "../../../store/doctorSlice";
-import InputMask from "react-input-mask";
+import MaskedInput from "react-text-mask";
 
 dayjs.extend(localizedFormat);
 dayjs.locale("ru");
@@ -23,8 +23,9 @@ const BookingDetails = () => {
   const [errors, setErrors] = useState({ name: "", email: "", phone: "" });
 
   const doctor = useSelector((state) => state.doctors.selectedDoctor);
-  const status = useSelector((state) => state.doctors.status);
-  const error = useSelector((state) => state.doctors.error);
+  // const status = useSelector((state) => state.doctors.status);
+  // const error = useSelector((state) => state.doctors.error);
+  const daysUpperCase = doctor.schedule.days.map((day) => day.toUpperCase());
 
   useEffect(() => {
     if (id) {
@@ -82,7 +83,6 @@ const BookingDetails = () => {
 
     try {
       await dispatch(bookAppointment({ doctorId: id, ...appointmentData }));
-      //todo: возможно поменять сообщение
       alert(
         "Вы оставили заявку на прием, наш персонал с вами свяжется в ближайшее время!"
       );
@@ -91,17 +91,20 @@ const BookingDetails = () => {
     }
   };
 
-  if (status === "loading") {
-    return <p>Загрузка...</p>;
-  }
+  const isDateAvailable = (date) => {
+    const dayName = date.format("dddd").toUpperCase();
+    return daysUpperCase.includes(dayName);
+  };
 
-  if (status === "failed") {
-    return <p>Ошибка: {error}</p>;
-  }
+  const isTimeAvailable = (time) => {
+    const startTime = dayjs().hour(doctor.schedule.hours[0]).minute(0);
+    const endTime = dayjs().hour(doctor.schedule.hours[1]).minute(0);
+    return time.isAfter(startTime) && time.isBefore(endTime);
+  };
 
-  const startTime = dayjs().hour(8).minute(0);
-  const endTime = dayjs().hour(17).minute(0);
   const timeSlots = [];
+  const startTime = dayjs().hour(doctor.schedule.hours[0]).minute(0);
+  const endTime = dayjs().hour(doctor.schedule.hours[1]).minute(0);
   let currentTime = startTime;
 
   while (currentTime.isBefore(endTime)) {
@@ -125,6 +128,7 @@ const BookingDetails = () => {
               <DatePicker
                 value={selectedDate}
                 onChange={handleDateChange}
+                shouldDisableDate={(date) => !isDateAvailable(date)}
                 disablePast
               />
             </LocalizationProvider>
@@ -138,19 +142,20 @@ const BookingDetails = () => {
                 );
                 const isSelected =
                   selectedTime && selectedTime.isSame(slot, "minute");
+                const isAvailable = isTimeAvailable(slot);
 
                 return (
                   <button
                     key={index}
                     onClick={() => handleTimeSelect(slot)}
                     className={`p-2 rounded-lg ${
-                      isSlotBooked
+                      isSlotBooked || !isAvailable
                         ? "bg-bgdarkgray text-white cursor-not-allowed"
                         : isSelected
                         ? "bg-maingreen text-white"
                         : "bg-bggray hover:bg-maingreen hover:text-white"
                     }`}
-                    disabled={isSlotBooked}
+                    disabled={isSlotBooked || !isAvailable}
                   >
                     {slot.format("HH:mm")}
                   </button>
@@ -207,20 +212,38 @@ const BookingDetails = () => {
                 )}
               </div>
               <div className="mb-4">
-                <InputMask
-                  mask="+7 (999) 999-99-99"
+                <MaskedInput
+                  mask={[
+                    "+",
+                    "7",
+                    " ",
+                    "(",
+                    /[1-9]/,
+                    /\d/,
+                    /\d/,
+                    ")",
+                    " ",
+                    /\d/,
+                    /\d/,
+                    /\d/,
+                    "-",
+                    /\d/,
+                    /\d/,
+                    "-",
+                    /\d/,
+                    /\d/,
+                  ]}
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  required
-                >
-                  {() => (
+                  placeholder="Телефон"
+                  render={(ref, props) => (
                     <input
-                      type="text"
-                      placeholder="Телефон"
+                      ref={ref}
+                      {...props}
                       className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
                   )}
-                </InputMask>
+                />
                 {errors.phone && (
                   <p className="text-red-500 text-sm">{errors.phone}</p>
                 )}

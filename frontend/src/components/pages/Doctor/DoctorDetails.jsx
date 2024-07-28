@@ -1,3 +1,4 @@
+// components/DoctorDetails.jsx
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -183,7 +184,31 @@ const DoctorDetails = () => {
                       <p className="font-medium">График работы</p>
                     </div>
                     <div className="flex-wrap">
-                      <p>{doctor.schedule}</p>
+                      {doctor.schedule ? (
+                        <div className="flex flex-row gap-3">
+                          {/* <p className="flex flex-col">
+                            <span className="font-medium mb-1">Дни:</span>{" "}
+                            <span className="font-medium">Часы:</span>
+                          </p> */}
+                          <p className="flex flex-col">
+                            <span className="mb-1">
+                              {doctor.schedule.days.join(", ")}
+                            </span>
+                            <span>
+                              c{" "}
+                              <span className="font-medium">
+                                {doctor.schedule.hours[0]}
+                              </span>{" "}
+                              до{" "}
+                              <span className="font-medium">
+                                {doctor.schedule.hours[1]}
+                              </span>
+                            </span>
+                          </p>
+                        </div>
+                      ) : (
+                        <p>График не указан</p>
+                      )}
                     </div>
                   </div>
 
