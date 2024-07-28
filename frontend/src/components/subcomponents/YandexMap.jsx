@@ -1,12 +1,11 @@
 import React, { useEffect, useRef } from "react";
 
 const YandexMap = () => {
-  const mapRef = useRef(null); // Ссылка на карту
-  const mapInstanceRef = useRef(null); // Ссылка на экземпляр карты
+  const mapRef = useRef(null);
+  const mapInstanceRef = useRef(null);
 
   useEffect(() => {
     const loadYandexMap = () => {
-      // Загружаем скрипт Яндекс.Карт
       const script = document.createElement("script");
       script.src = "https://api-maps.yandex.ru/2.1/?lang=ru_RU";
       script.type = "text/javascript";
@@ -51,7 +50,7 @@ const YandexMap = () => {
       ref={mapRef} // Привязываем ссылку к div карты
       style={{
         width: "100%",
-        height: "400px",
+        height: "500px",
         marginTop: "20px",
         borderRadius: "8px",
         overflow: "hidden",

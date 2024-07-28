@@ -5,8 +5,8 @@ import mail from "../../assets/mail.webp";
 import location from "../../assets/location.webp";
 import fakephoto from "../../assets/fakephoto_building.jpg";
 
-import YandexMap from "../subcomponents/YandexMap"; // Импортируйте компонент карты
-// todo: fix responsiveness
+import YandexMap from "../subcomponents/YandexMap";
+
 const Contacts = () => {
   return (
     <>

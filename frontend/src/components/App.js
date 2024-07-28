@@ -8,7 +8,7 @@ import {
 import { Provider } from "react-redux";
 import { store } from "../store/store";
 import Header from "./Navigation/Header";
-import HomePage from "./pages/Home";
+import HomePage from "./pages/Home/Home";
 import UserLogin from "./pages/UserLogin";
 import AdminLogin from "./Admin/AdminLogin";
 import Dashboard from "./pages/Admin/Dashboard";
