@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Typography, Avatar, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { fetchDoctors } from "../../../store/doctorSlice";
+import DoctorCategories from "./DoctorCategories"; // Импорт нового компонента
 
 const ColorButton = styled(Button)(({ theme }) => ({
   height: 32,
@@ -21,10 +22,27 @@ const Doctors = () => {
   const doctors = useSelector((state) => state.doctors.doctors);
   const status = useSelector((state) => state.doctors.status);
   const error = useSelector((state) => state.doctors.error);
+  const [filteredDoctors, setFilteredDoctors] = useState(doctors);
 
   useEffect(() => {
     dispatch(fetchDoctors());
   }, [dispatch]);
+
+  useEffect(() => {
+    setFilteredDoctors(doctors);
+  }, [doctors]);
+
+  const handleCategorySelect = (category) => {
+    setFilteredDoctors(
+      doctors.filter((doctor) =>
+        doctor.specialty
+          .split(", ")
+          .some((spec) =>
+            spec.toLowerCase().includes(category ? category.toLowerCase() : "")
+          )
+      )
+    );
+  };
 
   if (status === "loading") {
     return <Typography>Loading...</Typography>;
@@ -39,8 +57,12 @@ const Doctors = () => {
       <h2 className="flex justify-center my-2 py-2 pl-2 border-[1px] border-bggray rounded-lg bg-bggray text-black font-montserrat text-lg">
         НАШИ СПЕЦИАЛИСТЫ
       </h2>
-      <section className="grid grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3 laptop:grid-cols-3 gap-2 place-content-between">
-        {doctors.map((doctor) => (
+      <DoctorCategories
+        doctors={doctors}
+        onSelectCategory={handleCategorySelect}
+      />
+      <section className="mt-4 grid grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3 laptop:grid-cols-3 gap-2 place-content-between">
+        {filteredDoctors.map((doctor) => (
           <div
             className="flex flex-col mb-1 p-2 h-[272px] border-bggray border-[2px] rounded-lg"
             style={{ minWidth: "305px", maxWidth: "600px" }}
@@ -51,12 +73,12 @@ const Doctors = () => {
                 src={`http://localhost:5000/${doctor.photo}`}
                 alt={doctor.name}
                 sx={{ width: 100, height: 120, mr: 2 }}
-                variant="square"
+                variant="rounded"
               />
               <div className="flex flex-col">
                 <p className="font-normal mb-3">{doctor.name}</p>
                 <p className="font-semibold text-xs laptop:text-[14px] text-maingreen">
-                  Врач {doctor.specialty.toLowerCase()}
+                  {doctor.specialty.toLowerCase()}
                 </p>
               </div>
             </div>
