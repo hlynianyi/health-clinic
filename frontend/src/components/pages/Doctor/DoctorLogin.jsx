@@ -8,6 +8,26 @@ const DoctorLogin = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  // const handleLogin = async () => {
+  //   try {
+  //     // Проверка существования логина
+  //     const response = await axios.post(
+  //       "http://localhost:5000/api/doctors/login",
+  //       { login, password }
+  //     );
+  //     if (response.data.success) {
+  //       // Переход на уникальную страницу доктора при успешной аутентификации
+  //       navigate(`/doctor-dashboard/${response.data.doctor._id}`);
+  //     } else {
+  //       setError(
+  //         response.data.message || "Ошибка при входе. Проверьте данные."
+  //       );
+  //     }
+  //   } catch (error) {
+  //     console.error("Ошибка при входе:", error);
+  //     setError("Ошибка при входе. Проверьте данные.");
+  //   }
+  // };
   const handleLogin = async () => {
     try {
       // Проверка существования логина

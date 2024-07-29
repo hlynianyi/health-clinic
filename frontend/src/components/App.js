@@ -53,8 +53,7 @@ const App = () => {
           <main className="flex flex-col grow px-1 tablet:px-4 tablet:pt-0 tablet laptop:px-8 desktop:px-16 large:px-64 font-montserrat text-base">
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/login" element={<UserLogin />} />
-              <Route path="/admin" element={<AdminLogin />} />
+              {/* <Route path="/login" element={<UserLogin />} /> */}
               <Route
                 path="/dashboard"
                 element={
@@ -95,9 +94,12 @@ const App = () => {
                   </ProtectedRoute>
                 }
               />
-
+              <Route path="/admin-login" element={<AdminLogin />} />
               <Route path="/doctor-login" element={<DoctorLogin />} />
-              <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
+              <Route
+                path="/doctor-dashboard/:id"
+                element={<DoctorDashboard />}
+              />
 
               <Route path="/doctors" element={<Doctors />} />
               <Route path="/doctors/:id" element={<DoctorDetails />} />

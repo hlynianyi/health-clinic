@@ -9,6 +9,7 @@ const AdminLogin = () => {
     password: "",
   });
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setCredentials({
@@ -28,49 +29,49 @@ const AdminLogin = () => {
     ) {
       login();
       sessionStorage.setItem("isAuthenticated", "true");
-      console.log(
-        'sessionStorage.getItem("isAuthenticated") :>> ',
-        sessionStorage.getItem("isAuthenticated")
-      );
-      console.log("isAuthenticated :>> ", isAuthenticated);
       navigate("/dashboard");
     } else {
-      alert("Invalid credentials");
+      setError("Неверные учетные данные");
     }
   };
 
   return (
-    <>
-      <h1 className="mt-4 mb-10 p-2 flex justify-center text-xl rounded-lg bg-bggray">
-        Администратор?
-      </h1>
-      <div className="flex justify-center mt-6">
-        <form className="flex flex-col gap-4 mt-6" onSubmit={handleSubmit}>
-          <input
-            className="p-2 border-2 rounded border-bgdarkgray px-6"
-            type="text"
-            name="username"
-            value={credentials.username}
-            onChange={handleChange}
-            placeholder="Логин"
-          />
-          <input
-            className="p-2 border-2 rounded border-bgdarkgray px-6"
-            type="password"
-            name="password"
-            value={credentials.password}
-            onChange={handleChange}
-            placeholder="Пароль"
-          />
+    <div className="flex justify-center items-center my-auto">
+      <div className="bg-white p-6 rounded shadow-md w-full max-w-sm">
+        <h2 className="text-2xl mb-4">Вход для администратора</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="block text-sm mb-2">Логин:</label>
+            <input
+              type="text"
+              name="username"
+              value={credentials.username}
+              onChange={handleChange}
+              className="w-full p-2 border rounded"
+              placeholder="Введите логин"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm mb-2">Пароль:</label>
+            <input
+              type="password"
+              name="password"
+              value={credentials.password}
+              onChange={handleChange}
+              className="w-full p-2 border rounded"
+              placeholder="Введите пароль"
+            />
+          </div>
+          {error && <p className="text-red-600 text-base mb-4">{error}</p>}
           <button
-            className="p-2 mt-6 border-2 rounded border-bgdarkgray px-6"
             type="submit"
+            className="w-full bg-maingreen text-white p-2 rounded"
           >
             Войти
           </button>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -99,22 +99,38 @@ exports.addAppointment = async (req, res) => {
   }
 };
 
+
 // UPDATE
 exports.updateDoctor = async (req, res) => {
   try {
     const updatedData = { ...req.body };
-    console.log("updatedData object schedule?:>> ", updatedData);
-    // if (updatedData.schedule) {
-    //   updatedData.schedule = JSON.parse(updatedData.schedule);
-    // }
+
+    // Если был загружен файл, добавляем путь к фото
+    if (req.file) {
+      updatedData.photo = req.file.path;
+    }
+
+    // Проверяем, есть ли поле schedule и десериализуем его, если это строка
+    if (typeof updatedData.schedule === "string") {
+      try {
+        updatedData.schedule = JSON.parse(updatedData.schedule);
+      } catch (error) {
+        return res
+          .status(400)
+          .json({ message: "Некорректный формат расписания" });
+      }
+    }
+
     const doctor = await Doctor.findByIdAndUpdate(req.params.id, updatedData, {
       new: true,
     });
     if (!doctor) {
-      return res.status(404).json({ message: "Doctor not found" });
+      return res.status(404).json({ message: "Доктор не найден" });
     }
+
     res.json(doctor);
   } catch (error) {
+    console.error("Ошибка при обновлении данных доктора:", error);
     res.status(500).json({ message: error.message });
   }
 };
