@@ -59,17 +59,28 @@ const ManageDoctors = () => {
 
   const handleSaveDoctor = async () => {
     try {
-      const { days, startHour, endHour, ...rest } = selectedDoctor;
-      const updatedDoctor = {
-        ...rest,
-        schedule: {
-          days,
-          hours: [startHour, endHour],
-        },
-      };
+      const { days, startHour, endHour, photo, ...rest } = selectedDoctor;
+      const formData = new FormData();
+      formData.append("name", rest.name);
+      formData.append("email", rest.email);
+      formData.append("specialty", rest.specialty);
+      formData.append("experience", rest.experience);
+      formData.append("about", rest.about);
+      formData.append("education", rest.education);
+      formData.append("schedule", JSON.stringify({ days, hours: [startHour, endHour] }));
+
+      if (photo && typeof photo !== "string") {
+        formData.append("photo", photo);
+      }
+
       await axios.put(
         `http://localhost:5000/api/doctors/${selectedDoctor._id}`,
-        updatedDoctor
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       fetchDoctors();
       handleCloseEdit();
