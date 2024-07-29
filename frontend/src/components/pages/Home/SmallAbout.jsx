@@ -22,7 +22,8 @@ const SmallAbout = () => {
           Мы рады приветствовать вас на нашем сайте!
         </h4>
         <h4 className="mb-4 text-sm">
-          «<span className="font-medium">Медицинский Центр на Демидова</span>» это:
+          «<span className="font-medium">Медицинский Центр на Демидова</span>»
+          это:
         </h4>
         <article className="flex flex-col text-sm gap-3 leading-[23px]">
           <p className="">
@@ -56,7 +57,7 @@ const SmallAbout = () => {
           ssr
           infinite={true}
           autoPlay={true}
-          autoPlaySpeed={5000}
+          autoPlaySpeed={8000}
           keyBoardControl={true}
           customTransition="all .5"
           transitionDuration={500}

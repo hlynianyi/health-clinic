@@ -58,10 +58,10 @@ const SmallReviews = () => {
         ssr
         infinite={true}
         autoPlay={true}
-        autoPlaySpeed={10000}
+        autoPlaySpeed={8000}
         keyBoardControl={true}
-        customTransition="all .5"
-        transitionDuration={1000}
+        customTransition="all 2.5"
+        transitionDuration={2000}
         removeArrowOnDeviceType={["tablet", "mobile", "desktop"]}
         containerClass="carousel-container"
         customDot={<CustomDot />}
@@ -76,7 +76,12 @@ const SmallReviews = () => {
           >
             <div
               className="bg-white rounded-lg p-4 shadow-lg  mx-auto"
-              style={{ maxWidth: "500px", minWidth: '290px', height: "430px", overflow: "hidden" }}
+              style={{
+                maxWidth: "500px",
+                minWidth: "290px",
+                height: "430px",
+                overflow: "hidden",
+              }}
             >
               <div className="flex flex-row gap-4">
                 <img

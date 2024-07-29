@@ -29,6 +29,8 @@ import ManageReviews from "./pages/Admin/ManageReviews";
 import ManageDoctors from "./pages/Admin/ManageDoctors";
 import ManageLicenses from "./pages/Admin/ManageLicenses";
 import { AuthProvider } from "../context/AuthContext"; // useAuth
+import DoctorDashboard from "./pages/Doctor/DoctorDashboard";
+import DoctorLogin from "./pages/Doctor/DoctorLogin";
 
 // todo: Логин докторов(UserLogin), страница для каждого доктора с возможностью брони визита
 
@@ -93,6 +95,10 @@ const App = () => {
                   </ProtectedRoute>
                 }
               />
+
+              <Route path="/doctor-login" element={<DoctorLogin />} />
+              <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
+
               <Route path="/doctors" element={<Doctors />} />
               <Route path="/doctors/:id" element={<DoctorDetails />} />
               <Route path="/services" element={<Services />} />
