@@ -8,12 +8,13 @@ const DashnoardButtonHidden = () => <div className="hidden"></div>;
 
 const Header = () => {
   const { isAuthenticated } = useAuth();
+  console.log('isAuthenticated :>> ', isAuthenticated);
   const navigate = useNavigate();
 
   return (
-    <header>
+    <header className="border-t-[4px] border-purple tablet:border-red laptop:border-blue desktop:border-yellow large:border-maingreen">
       <div className="flex justify-between items-center">
-        <div className="bg-bgdarkgray grow py-1 px-1 tablet:px-4 laptop:px-8 desktop:px-16 flex justify-start">
+        <div className="bg-bgdarkgray grow py-1 px-2  flex justify-end">
           {isAuthenticated ? (
             <Button
               style={{

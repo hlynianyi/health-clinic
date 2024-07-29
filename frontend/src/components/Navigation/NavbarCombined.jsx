@@ -58,9 +58,9 @@ const CombinedNavbar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  // <div className="bg-bggray shadow-none border-b-[10px] border-purple tablet:border-red laptop:border-blue desktop:border-yellow large:border-maingreen">
+
   return (
-    <div className="bg-bggray shadow-none ">
+    <div className="bg-bggray shadow-none">
       <div className="flex justify-between items-center p-1 tablet:px-4 laptop:px-8 desktop:px-16 large:px-64">
         <div className="flex items-center">
           <img

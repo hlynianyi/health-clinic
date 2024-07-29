@@ -8,6 +8,7 @@ module.exports = {
       bggray: "#F6F8F7",
       navbargray: "#F2F2F2",
       bgdarkgray: "#343434",
+      graytext: "#555555",
       white: "#FFFFFF",
       red: "#FF0101",
       green: "#1CFF01",
