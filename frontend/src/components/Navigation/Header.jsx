@@ -8,12 +8,12 @@ const DashnoardButtonHidden = () => <div className="hidden"></div>;
 
 const Header = () => {
   const { isAuthenticated } = useAuth();
-  console.log('isAuthenticated :>> ', isAuthenticated);
+  console.log("isAuthenticated :>> ", isAuthenticated);
   const navigate = useNavigate();
 
   return (
-    <header className="border-t-[4px] border-purple tablet:border-red laptop:border-blue desktop:border-yellow large:border-maingreen">
-      <div className="flex justify-between items-center">
+    <header className="">
+      {/* <div className="flex justify-between items-center">
         <div className="bg-bgdarkgray grow py-1 px-2  flex justify-end">
           {isAuthenticated ? (
             <Button
@@ -30,10 +30,14 @@ const Header = () => {
             <DashnoardButtonHidden />
           )}
         </div>
-      </div>
+      </div> */}
       <CombinedNavbar />
     </header>
   );
 };
 
 export default Header;
+
+/**
+ * border-t-[4px] border-purple tablet:border-red laptop:border-blue desktop:border-yellow large:border-maingreen
+ */

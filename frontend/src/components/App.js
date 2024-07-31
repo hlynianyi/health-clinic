@@ -9,11 +9,10 @@ import { Provider } from "react-redux";
 import { store } from "../store/store";
 import Header from "./Navigation/Header";
 import HomePage from "./pages/Home/Home";
-import UserLogin from "./pages/UserLogin";
 import AdminLogin from "./Admin/AdminLogin";
 import Dashboard from "./pages/Admin/Dashboard";
 import RegisterDoctor from "./pages/Admin/RegisterDoctor";
-import Doctors from "./pages/Doctor/Doctors"; // Импортируем компонент Doctors
+import Doctors from "./pages/Doctor/Doctors";
 import Footer from "./Navigation/Footer";
 import Services from "./pages/Services";
 import Diagnostic from "./pages/Diagnostic";
@@ -22,15 +21,16 @@ import Patients from "./pages/Patients";
 import Reviews from "./pages/Reviews";
 import Contacts from "./pages/Contacts";
 import License from "./pages/License";
-import DoctorDetails from "./pages/Doctor/DoctorDetails"; // Импорт нового компонента
+import DoctorDetails from "./pages/Doctor/DoctorDetails";
 import Booking from "./pages/Booking/Booking";
 import BookingDetails from "./pages/Booking/BookingDetails";
 import ManageReviews from "./pages/Admin/ManageReviews";
 import ManageDoctors from "./pages/Admin/ManageDoctors";
 import ManageLicenses from "./pages/Admin/ManageLicenses";
-import { AuthProvider } from "../context/AuthContext"; // useAuth
+import ManageServices from "./pages/Admin/ManageServices";
 import DoctorDashboard from "./pages/Doctor/DoctorDashboard";
 import DoctorLogin from "./pages/Doctor/DoctorLogin";
+import { AuthProvider } from "../context/AuthContext"; // useAuth
 
 // todo: Логин докторов(UserLogin), страница для каждого доктора с возможностью брони визита
 
@@ -91,6 +91,14 @@ const App = () => {
                 element={
                   <ProtectedRoute adminOnly={true}>
                     <ManageLicenses />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/manage-services"
+                element={
+                  <ProtectedRoute adminOnly={true}>
+                    <ManageServices />
                   </ProtectedRoute>
                 }
               />

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import NavbarLower from "./NavbarLower";
-import navbarLogo from "../../assets/logo3.png";
+import navbarLogo from "../../assets/sitelogo_4.png";
 import { Button, IconButton, Menu, MenuItem } from "@mui/material";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -34,12 +34,12 @@ const CombinedNavbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
-  const [isPhoneScreen, setIsPhoneScreen] = useState(window.innerWidth < 490);
+  const [isPhoneScreen, setIsPhoneScreen] = useState(window.innerWidth < 665);
 
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth < 768);
-      setIsPhoneScreen(window.innerWidth < 490);
+      setIsPhoneScreen(window.innerWidth < 665);
     };
 
     window.addEventListener("resize", handleResize);
@@ -60,38 +60,36 @@ const CombinedNavbar = () => {
   };
 
   return (
-    <div className="bg-bggray shadow-none">
+    <div className="bg-navbargray shadow-none">
       <div className="flex justify-between items-center p-1 tablet:px-4 laptop:px-8 desktop:px-16 large:px-64">
-        <div className="flex items-center">
+        <div className="flex items-center shrink-0">
           <img
             src={navbarLogo}
             alt="Clinic Logo"
-            className="h-10 rounded-lg cursor-pointer"
+            className=" h-14 rounded-lg cursor-pointer"
             onClick={() => navigate("/")}
           />
-          <div className="hidden md:flex flex-col nowrap font-semibold font-montserrat text-maingreen">
-            <h2 className="leading-5">
-              Медицинский центр
-              <br /> на Демидова
-            </h2>
-          </div>
+          <div className="hidden md:flex flex-col nowrap font-semibold font-montserrat text-maingreen"></div>
         </div>
 
         <div className="flex items-center gap-2 tablet:gap-6">
-          <div className="mr-1 flex items-center gap-1">
-            <div className="mr-1">
-              <PhoneIcon />
+          {!isPhoneScreen && (
+            <div className="mr-1 flex items-center gap-1">
+              <div className="mr-1">
+                <PhoneIcon />
+              </div>
+              <div className="flex flex-col">
+                <p className="font-sans text-gray-600 text-xs">
+                  Круглосуточная запись:
+                </p>
+                <p className="font-montserrat text-sm">+7 (495) 187-88-36</p>
+              </div>
             </div>
-            <div className="flex flex-col">
-              <p className="font-sans text-gray-600 text-xs">
-                {isPhoneScreen ? "" : "Круглосуточная запись:"}
-              </p>
-              <p className="font-montserrat text-sm">+7 (495) 187-88-36</p>
-            </div>
-          </div>
-          <div className={`${isSmallScreen ? "block" : "hidden"}`}>
+          )}
+          <div className={` ${isSmallScreen ? "block" : "hidden"}`}>
             <IconButton onClick={handleClick}>
               <MenuIcon
+              sx={{ width: "34px", height: "34px"}}
                 id="basic-button"
                 aria-controls={open ? "basic-menu" : undefined}
                 aria-haspopup="true"
@@ -137,6 +135,7 @@ const CombinedNavbar = () => {
             onClick={() => navigate("/booking")}
             startIcon={<AssignmentIcon />}
             variant=""
+            sx={{ height: "50px" }}
           >
             {isSmallScreen ? <p>Записаться</p> : <p>Записаться онлайн</p>}
           </ColorButton>

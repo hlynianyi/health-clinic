@@ -4,6 +4,7 @@ import tel from "../../assets/tel.webp";
 import mail from "../../assets/mail.webp";
 import location from "../../assets/location.webp";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
 
 // todo: mobile responsive version
 
@@ -76,22 +77,36 @@ const Footer = () => {
           <h2 className="text-lg tablet:mb-4">О клинике</h2>
         </section>
       </footer>
-      <div className="p-1 tablet:px-2 border-t-2 border-graytext flex bg-bgdarkgray text-graytext gap-1">
-        <span>Вы</span>
-        <button
-          onClick={() => navigate("/admin-login")}
-          className="px-1 hover:bg-maingreen hover:text-white rounded"
-        >
-          администратор
-        </button>
-        <span>|</span>
-        <button
-          onClick={() => navigate("/doctor-login")}
-          className="px-1 hover:bg-maingreen hover:text-white rounded"
-        >
-          врач
-        </button>
-        <span>?</span>
+      <div className="p-1 tablet:px-2 border-t-2 border-graytext flex justify-between bg-bgdarkgray text-graytext ">
+        <div className="flex gap-1 items-center">
+          <span>Вы</span>
+          <button
+            onClick={() => navigate("/admin-login")}
+            className="px-1 hover:bg-maingreen hover:text-white rounded"
+          >
+            администратор
+          </button>
+          <span>|</span>
+          <button
+            onClick={() => navigate("/doctor-login")}
+            className="px-1 hover:bg-maingreen hover:text-white rounded"
+          >
+            врач
+          </button>
+          <span>?</span>
+        </div>
+        <div className="">
+          <Button
+            style={{
+              color: "#fff",
+              backgroundColor: "#28926E",
+              fontSize: 8,
+            }}
+            onClick={() => navigate("/dashboard")}
+          >
+            Панель администратора
+          </Button>
+        </div>
       </div>
     </>
   );

@@ -29,9 +29,9 @@ const Modal = ({ onClose, children }) => {
       >
         <button
           onClick={handleClose}
-          className="absolute top-0 right-0 m-2 text-black text-xl"
+          className="absolute top-0 right-0 m-2 text-black text-xl bg-graytext rounded py-1 px-3 text-white flex justify-center items-center"
         >
-          &times;
+          Закрыть
         </button>
         {children}
       </div>

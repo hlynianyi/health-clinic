@@ -7,8 +7,8 @@ import { useTheme } from "@mui/material/styles";
 
 const MENU = [
   { label: "Врачи", path: "/doctors" },
-  { label: "Услуги", path: "/services" },
-  { label: "Диагностика", path: "/diagnostics" },
+  { label: "Услуги и цены", path: "/services" },
+  // { label: "Диагностика", path: "/diagnostics" },
   { label: "Акции", path: "/promotions" },
   { label: "Пациентам", path: "/patients" },
   { label: "Лицензии", path: "/license" },
@@ -24,7 +24,7 @@ const NavbarLower = () => {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
-    const found = MENU.find(item => item.path === location.pathname);
+    const found = MENU.find((item) => item.path === location.pathname);
     if (found) {
       setCurrentActiveTab(found.path);
     } else {
