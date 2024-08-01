@@ -26,7 +26,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
   "&:hover": {
     backgroundColor: "#1976D2",
   },
-  fontSize: 12,
+  fontSize: 13,
 }));
 
 const CombinedNavbar = () => {
@@ -79,10 +79,10 @@ const CombinedNavbar = () => {
                 <PhoneIcon />
               </div>
               <div className="flex flex-col">
-                <p className="font-sans text-gray-600 text-xs">
+                <p className="font-sans text-gray-600 text-[13px]">
                   Круглосуточная запись:
                 </p>
-                <p className="font-montserrat text-sm">+7 (495) 187-88-36</p>
+                <p className="font-montserrat text-base">+7 (495) 187-88-36</p>
               </div>
             </div>
           )}

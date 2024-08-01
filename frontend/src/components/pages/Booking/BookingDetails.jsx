@@ -23,8 +23,6 @@ const BookingDetails = () => {
   const [errors, setErrors] = useState({ name: "", email: "", phone: "" });
 
   const doctor = useSelector((state) => state.doctors.selectedDoctor);
-  // const status = useSelector((state) => state.doctors.status);
-  // const error = useSelector((state) => state.doctors.error);
   const daysUpperCase = doctor.schedule.days.map((day) => day.toUpperCase());
 
   useEffect(() => {
@@ -35,7 +33,7 @@ const BookingDetails = () => {
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    setSelectedTime(null); // Сбрасываем выбранное время при смене даты
+    setSelectedTime(null);
   };
 
   const handleTimeSelect = (time) => {
