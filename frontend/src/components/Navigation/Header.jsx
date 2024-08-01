@@ -8,31 +8,13 @@ const DashnoardButtonHidden = () => <div className="hidden"></div>;
 
 const Header = () => {
   const { isAuthenticated } = useAuth();
-  console.log("isAuthenticated :>> ", isAuthenticated);
+  // console.log("isAuthenticated :>> ", isAuthenticated);
   const navigate = useNavigate();
 
   return (
-    <header className="">
-      {/* <div className="flex justify-between items-center">
-        <div className="bg-bgdarkgray grow py-1 px-2  flex justify-end">
-          {isAuthenticated ? (
-            <Button
-              style={{
-                color: "#fff",
-                backgroundColor: "#28926E",
-                fontSize: 12,
-              }}
-              onClick={() => navigate("/dashboard")}
-            >
-              Панель администратора
-            </Button>
-          ) : (
-            <DashnoardButtonHidden />
-          )}
-        </div>
-      </div> */}
+    <>
       <CombinedNavbar />
-    </header>
+    </>
   );
 };
 

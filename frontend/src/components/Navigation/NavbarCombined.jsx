@@ -60,7 +60,7 @@ const CombinedNavbar = () => {
   };
 
   return (
-    <div className="bg-navbargray shadow-none">
+    <header className="bg-navbargray shadow-none">
       <div className="flex justify-between items-center p-1 tablet:px-4 laptop:px-8 desktop:px-16 large:px-64">
         <div className="flex items-center shrink-0">
           <img
@@ -89,7 +89,7 @@ const CombinedNavbar = () => {
           <div className={` ${isSmallScreen ? "block" : "hidden"}`}>
             <IconButton onClick={handleClick}>
               <MenuIcon
-              sx={{ width: "34px", height: "34px"}}
+                sx={{ width: "34px", height: "34px" }}
                 id="basic-button"
                 aria-controls={open ? "basic-menu" : undefined}
                 aria-haspopup="true"
@@ -144,7 +144,7 @@ const CombinedNavbar = () => {
       <div className="hidden md:block">
         <NavbarLower />
       </div>
-    </div>
+    </header>
   );
 };
 
