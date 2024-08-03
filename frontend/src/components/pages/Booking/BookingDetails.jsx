@@ -7,8 +7,8 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
+import MaskedInput from "react-text-mask";
 import { fetchDoctorById, bookAppointment } from "../../../store/doctorSlice";
-import InputMask from "react-input-mask";
 
 dayjs.extend(localizedFormat);
 dayjs.extend(isSameOrAfter);
@@ -30,11 +30,10 @@ const BookingDetails = () => {
     if (id) {
       dispatch(fetchDoctorById(id));
     }
-  }, [id, dispatch]);
+  }, [id, dispatch, selectedDate]);
 
   const handleDateChange = (date) => {
     setSelectedDate(date.startOf("day"));
-    console.log('selectedDate :>> ', selectedDate);
     setSelectedTime(null);
   };
 
@@ -80,12 +79,7 @@ const BookingDetails = () => {
       email,
       phone,
     };
-    console.log(
-      "appointmentData.date, appointmentData.time :>> ",
-      appointmentData.date,
-      "\\",
-      appointmentData.time
-    );
+    
     try {
       await dispatch(bookAppointment({ doctorId: id, ...appointmentData }));
       alert(
@@ -104,11 +98,12 @@ const BookingDetails = () => {
   };
 
   const isTimeSlotBooked = (slot) => {
-    return doctor.appointments?.some(
-      (appt) =>
-        dayjs(appt.date, "DD.MM.YYYY").isSame(selectedDate, "day") &&
-        dayjs(appt.time, "HH:mm").isSame(slot, "minute")
-    );
+    const slotDate = dayjs(slot).format("DD.MM.YYYY");
+    const slotTime = dayjs(slot).format("HH:mm");
+
+    return doctor.appointments?.some((appt) => {
+      return appt.date === slotDate && appt.time === slotTime;
+    });
   };
 
   const timeSlots = [];
@@ -218,26 +213,38 @@ const BookingDetails = () => {
                 )}
               </div>
               <div className="mb-4">
-                <input
-                  // {...inputProps}
-                  type="text"
-                  placeholder="Телефон"
-                  className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                />
-                {/* <InputMask
-                  mask="+7 (999) 999-99-99"
+                <MaskedInput
+                  mask={[
+                    "+",
+                    "7",
+                    " ",
+                    "(",
+                    /[1-9]/,
+                    /\d/,
+                    /\d/,
+                    ")",
+                    " ",
+                    /\d/,
+                    /\d/,
+                    /\d/,
+                    "-",
+                    /\d/,
+                    /\d/,
+                    "-",
+                    /\d/,
+                    /\d/,
+                  ]}
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                >
-                  {(inputProps) => (
+                  placeholder="Телефон"
+                  render={(ref, props) => (
                     <input
-                      {...inputProps}
-                      type="text"
-                      placeholder="Телефон"
+                      ref={ref}
+                      {...props}
                       className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
                   )}
-                </InputMask> */}
+                />
                 {errors.phone && (
                   <p className="text-red-500 text-sm">{errors.phone}</p>
                 )}
