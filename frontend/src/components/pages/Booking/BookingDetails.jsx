@@ -4,12 +4,14 @@ import { useParams } from "react-router-dom";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
+import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
 import { fetchDoctorById, bookAppointment } from "../../../store/doctorSlice";
-import MaskedInput from "react-text-mask";
+import InputMask from "react-input-mask";
 
 dayjs.extend(localizedFormat);
+dayjs.extend(isSameOrAfter);
 dayjs.locale("ru");
 
 const BookingDetails = () => {
@@ -23,7 +25,6 @@ const BookingDetails = () => {
   const [errors, setErrors] = useState({ name: "", email: "", phone: "" });
 
   const doctor = useSelector((state) => state.doctors.selectedDoctor);
-  const daysUpperCase = doctor.schedule.days.map((day) => day.toUpperCase());
 
   useEffect(() => {
     if (id) {
@@ -32,7 +33,8 @@ const BookingDetails = () => {
   }, [id, dispatch]);
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
+    setSelectedDate(date.startOf("day"));
+    console.log('selectedDate :>> ', selectedDate);
     setSelectedTime(null);
   };
 
@@ -72,13 +74,18 @@ const BookingDetails = () => {
     }
 
     const appointmentData = {
-      date: selectedDate.toISOString(),
+      date: selectedDate.format("DD.MM.YYYY"),
       time: selectedTime.format("HH:mm"),
       name,
       email,
       phone,
     };
-
+    console.log(
+      "appointmentData.date, appointmentData.time :>> ",
+      appointmentData.date,
+      "\\",
+      appointmentData.time
+    );
     try {
       await dispatch(bookAppointment({ doctorId: id, ...appointmentData }));
       alert(
@@ -91,22 +98,26 @@ const BookingDetails = () => {
 
   const isDateAvailable = (date) => {
     const dayName = date.format("dddd").toUpperCase();
-    return daysUpperCase.includes(dayName);
+    return doctor?.schedule?.days
+      ?.map((day) => day.toUpperCase())
+      .includes(dayName);
   };
 
-  const isTimeAvailable = (time) => {
-    const startTime = dayjs().hour(doctor.schedule.hours[0]).minute(0);
-    const endTime = dayjs().hour(doctor.schedule.hours[1]).minute(0);
-    return time.isAfter(startTime) && time.isBefore(endTime);
+  const isTimeSlotBooked = (slot) => {
+    return doctor.appointments?.some(
+      (appt) =>
+        dayjs(appt.date, "DD.MM.YYYY").isSame(selectedDate, "day") &&
+        dayjs(appt.time, "HH:mm").isSame(slot, "minute")
+    );
   };
 
   const timeSlots = [];
-  const startTime = dayjs().hour(doctor.schedule.hours[0]).minute(0);
-  const endTime = dayjs().hour(doctor.schedule.hours[1]).minute(0);
-  let currentTime = startTime;
+  let startTime = selectedDate.hour(doctor.schedule.hours[0]).minute(0);
+  let endTime = selectedDate.hour(doctor.schedule.hours[1]).minute(0);
+  let currentTime = startTime.clone();
 
   while (currentTime.isBefore(endTime)) {
-    timeSlots.push(currentTime);
+    timeSlots.push(currentTime.clone());
     currentTime = currentTime.add(30, "minute");
   }
 
@@ -118,8 +129,10 @@ const BookingDetails = () => {
             ЗАПИСЬ НА ПРИЕМ
           </h2>
           <section className="flex flex-col text-base mb-4 tablet:mb-8">
-            <h3 className="underline underline-offset-[5px] py-2 flex justify-center text-[18px]">
-              Доктор {doctor.name}
+            <h3 className="py-2 flex justify-center gap-2 text-[18px]">
+              <span>Врач</span>
+              <span>-</span>
+              <span className="font-semibold">{doctor.name}</span>
             </h3>
             <p className="pt-2 pb-2 font-medium">Выберите дату:</p>
             <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="ru">
@@ -133,27 +146,22 @@ const BookingDetails = () => {
             <p className="pt-4 pb-2 font-medium">Выберите время:</p>
             <div className="grid grid-cols-3 gap-4 mt-4">
               {timeSlots.map((slot, index) => {
-                const isSlotBooked = doctor.appointments?.some(
-                  (appt) =>
-                    dayjs(appt.date).isSame(selectedDate, "day") &&
-                    dayjs(appt.time, "HH:mm").isSame(slot, "minute")
-                );
+                const isSlotBooked = isTimeSlotBooked(slot);
                 const isSelected =
                   selectedTime && selectedTime.isSame(slot, "minute");
-                const isAvailable = isTimeAvailable(slot);
 
                 return (
                   <button
                     key={index}
                     onClick={() => handleTimeSelect(slot)}
                     className={`p-2 rounded-lg ${
-                      isSlotBooked || !isAvailable
+                      isSlotBooked
                         ? "bg-bgdarkgray text-white cursor-not-allowed"
                         : isSelected
                         ? "bg-maingreen text-white"
                         : "bg-bggray hover:bg-maingreen hover:text-white"
                     }`}
-                    disabled={isSlotBooked || !isAvailable}
+                    disabled={isSlotBooked}
                   >
                     {slot.format("HH:mm")}
                   </button>
@@ -210,38 +218,26 @@ const BookingDetails = () => {
                 )}
               </div>
               <div className="mb-4">
-                <MaskedInput
-                  mask={[
-                    "+",
-                    "7",
-                    " ",
-                    "(",
-                    /[1-9]/,
-                    /\d/,
-                    /\d/,
-                    ")",
-                    " ",
-                    /\d/,
-                    /\d/,
-                    /\d/,
-                    "-",
-                    /\d/,
-                    /\d/,
-                    "-",
-                    /\d/,
-                    /\d/,
-                  ]}
+                <input
+                  // {...inputProps}
+                  type="text"
+                  placeholder="Телефон"
+                  className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
+                {/* <InputMask
+                  mask="+7 (999) 999-99-99"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  placeholder="Телефон"
-                  render={(ref, props) => (
+                >
+                  {(inputProps) => (
                     <input
-                      ref={ref}
-                      {...props}
+                      {...inputProps}
+                      type="text"
+                      placeholder="Телефон"
                       className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
                   )}
-                />
+                </InputMask> */}
                 {errors.phone && (
                   <p className="text-red-500 text-sm">{errors.phone}</p>
                 )}
