@@ -78,18 +78,18 @@ const Footer = () => {
         </section>
       </footer>
       <div className="p-1 tablet:px-2 border-t-2 border-graytext flex justify-between bg-bgdarkgray text-graytext ">
-        <div className="flex gap-1 items-center">
+        <div className="flex gap-2 items-center">
           <span>Вы</span>
           <button
             onClick={() => navigate("/admin-login")}
-            className="px-1 hover:bg-maingreen hover:text-white rounded"
+            className="px-3 hover:bg-maingreen hover:text-white rounded"
           >
             администратор
           </button>
           <span>|</span>
           <button
             onClick={() => navigate("/doctor-login")}
-            className="px-1 hover:bg-maingreen hover:text-white rounded"
+            className="px-3 hover:bg-maingreen hover:text-white rounded"
           >
             врач
           </button>

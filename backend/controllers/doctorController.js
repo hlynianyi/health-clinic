@@ -99,7 +99,6 @@ exports.addAppointment = async (req, res) => {
   }
 };
 
-
 // UPDATE
 exports.updateDoctor = async (req, res) => {
   try {
@@ -160,8 +159,72 @@ exports.updateReview = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+exports.updateAppointment = async (req, res) => {
+  const { id, appointmentId } = req.params;
+  const updatedAppointment = req.body;
+
+  try {
+    const doctor = await Doctor.findById(id);
+    if (!doctor) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Доктор не найден" });
+    }
+
+    const appointmentIndex = doctor.appointments.findIndex(
+      (appt) => appt._id.toString() === appointmentId
+    );
+    if (appointmentIndex === -1) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Запись не найдена" });
+    }
+
+    doctor.appointments[appointmentIndex] = {
+      ...doctor.appointments[appointmentIndex].toObject(),
+      ...updatedAppointment,
+    };
+    await doctor.save();
+
+    res.json({
+      success: true,
+      message: "Запись обновлена",
+      appointments: doctor.appointments,
+    });
+  } catch (error) {
+    console.error("Ошибка при обновлении записи:", error);
+    res.status(500).json({ success: false, message: "Ошибка сервера" });
+  }
+};
 
 // DELETE
+exports.deleteAppointment = async (req, res) => {
+  const { id, appointmentId } = req.params;
+
+  try {
+    const doctor = await Doctor.findById(id);
+    if (!doctor) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Доктор не найден" });
+    }
+
+    doctor.appointments = doctor.appointments.filter(
+      (appt) => appt._id.toString() !== appointmentId
+    );
+    await doctor.save();
+
+    res.json({
+      success: true,
+      message: "Запись удалена",
+      appointments: doctor.appointments,
+    });
+  } catch (error) {
+    console.error("Ошибка при удалении записи:", error);
+    res.status(500).json({ success: false, message: "Ошибка сервера" });
+  }
+};
+
 exports.deleteReview = async (req, res) => {
   try {
     const { id, reviewId } = req.params;

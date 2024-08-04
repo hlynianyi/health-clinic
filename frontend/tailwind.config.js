@@ -16,6 +16,7 @@ module.exports = {
       blue: "#0501FF",
       purple: "#E001FF",
       black: "#000000",
+      orange: '#ffa500',
     },
     extend: {
       screens: {
