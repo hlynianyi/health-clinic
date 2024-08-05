@@ -74,7 +74,7 @@ const Contacts = () => {
           </aside>
         </div>
       </section>
-      <YandexMap /> 
+      <YandexMap />
     </>
   );
 };

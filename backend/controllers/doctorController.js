@@ -1,4 +1,5 @@
 const Doctor = require("../models/Doctor");
+const bcrypt = require("bcryptjs");
 
 // GET
 exports.getDoctors = async (req, res) => {
@@ -103,6 +104,13 @@ exports.addAppointment = async (req, res) => {
 exports.updateDoctor = async (req, res) => {
   try {
     const updatedData = { ...req.body };
+    const { password } = updatedData;
+
+    if (password) {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+      updatedData.password = hashedPassword;
+    }
 
     // Если был загружен файл, добавляем путь к фото
     if (req.file) {
@@ -123,6 +131,7 @@ exports.updateDoctor = async (req, res) => {
     const doctor = await Doctor.findByIdAndUpdate(req.params.id, updatedData, {
       new: true,
     });
+
     if (!doctor) {
       return res.status(404).json({ message: "Доктор не найден" });
     }

@@ -24,6 +24,19 @@ const Booking = () => {
     return <p>Error: {error}</p>;
   }
 
+  const displaySpecialities = (specialities) => {
+    const specArray = specialities.split(",").map((spec) => spec.toUpperCase());
+    return (
+      <div className="flex flex-col gap-0">
+        {specArray.map((spec, idx) => (
+          <span key={idx} className="text-center text-maingreen text-[13px]">
+            {spec}
+          </span>
+        ))}
+      </div>
+    );
+  };
+
   return (
     <>
       <h2 className="flex justify-center  my-2 py-2 pl-2 border-[1px] border-bggray rounded-lg bg-bggray text-black font-montserrat text-lg">
@@ -38,17 +51,18 @@ const Booking = () => {
           >
             <div className="w-1/2">
               <img
-                className="rounded-lg object-cover h-[180px] w-[170px]"
+                className="rounded object-contain max-h-[310px] "
                 src={`http://localhost:5000/${doctor.photo}`}
                 alt={doctor.name}
-                variant="rounded"
               />
             </div>
             <div className="w-1/2 flex flex-col ">
-              <p className="font-medium mb-3">{doctor.name}</p>
-              <p className="font-semibold text-base ">
-                {doctor.specialty.toLowerCase()}
+              <p className="font-medium mb-3 h-[85px] text-center">
+                {doctor.name}
               </p>
+              <div className="text-base flex justify-center font-semibold text-maingreen">
+                {displaySpecialities(doctor.specialty)}
+              </div>
             </div>
           </div>
         ))}

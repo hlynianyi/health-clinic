@@ -61,13 +61,18 @@ const ManageDoctors = () => {
     try {
       const { days, startHour, endHour, photo, ...rest } = selectedDoctor;
       const formData = new FormData();
+      formData.append("login", rest.login);
+      formData.append("password", rest.password);
       formData.append("name", rest.name);
       formData.append("email", rest.email);
       formData.append("specialty", rest.specialty);
       formData.append("experience", rest.experience);
       formData.append("about", rest.about);
       formData.append("education", rest.education);
-      formData.append("schedule", JSON.stringify({ days, hours: [startHour, endHour] }));
+      formData.append(
+        "schedule",
+        JSON.stringify({ days, hours: [startHour, endHour] })
+      );
 
       if (photo && typeof photo !== "string") {
         formData.append("photo", photo);
@@ -88,7 +93,6 @@ const ManageDoctors = () => {
       console.error("Error updating doctor:", error);
     }
   };
-
   const handleReviewInputChange = (updatedDoctor) => {
     setSelectedDoctor(updatedDoctor);
   };
@@ -135,7 +139,7 @@ const ManageDoctors = () => {
         {doctors.map((doctor) => (
           <li
             key={doctor._id}
-            className="flex justify-between py-1 border-b-[1px] border-b-mainblue"
+            className="flex flex-col laptop:flex-row gap-2 justify-between py-1 border-b-[1px] border-b-mainblue"
           >
             <span className="font-semibold flex flex-col justify-center">
               {doctor.name}

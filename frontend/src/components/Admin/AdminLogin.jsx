@@ -38,7 +38,7 @@ const AdminLogin = () => {
   return (
     <div className="flex justify-center items-center my-auto">
       <div className="bg-white p-6 rounded shadow-md w-full max-w-sm">
-        <h2 className="text-2xl mb-4">Вход для администратора</h2>
+        <h2 className="text-2xl mb-4">Вход в админ-панель</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-sm mb-2">Логин:</label>

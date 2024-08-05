@@ -44,6 +44,19 @@ const Doctors = () => {
     );
   };
 
+  const displaySpecialities = (specialities) => {
+    const specArray = specialities.split(",").map((spec) => spec.toUpperCase());
+    return (
+      <div className="flex flex-col gap-1">
+        {specArray.map((spec, idx) => (
+          <span key={idx} className="text-center text-maingreen text-[13px]">
+            {spec}
+          </span>
+        ))}
+      </div>
+    );
+  };
+
   if (status === "loading") {
     return <Typography>Loading...</Typography>;
   }
@@ -75,11 +88,13 @@ const Doctors = () => {
                 sx={{ width: 100, height: 120, mr: 2 }}
                 variant="rounded"
               />
-              <div className="flex flex-col">
-                <p className="font-normal mb-3">{doctor.name}</p>
-                <p className="font-semibold text-xs laptop:text-[14px] text-maingreen">
-                  {doctor.specialty.toLowerCase()}
+              <div className="flex flex-col w-full">
+                <p className="font-normal mb-4 flex justify-center text-center">
+                  {doctor.name}
                 </p>
+                <div className="font-semibold text-xs laptop:text-[14px] text-maingreen">
+                  {displaySpecialities(doctor.specialty)}
+                </div>
               </div>
             </div>
             <div className="flex flex-row">

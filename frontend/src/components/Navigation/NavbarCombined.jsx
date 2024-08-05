@@ -135,7 +135,7 @@ const CombinedNavbar = () => {
             onClick={() => navigate("/booking")}
             startIcon={<AssignmentIcon />}
             variant=""
-            sx={{ height: "50px" }}
+            sx={{ height: "44px" }}
           >
             {isSmallScreen ? <p>Записаться</p> : <p>Записаться онлайн</p>}
           </ColorButton>

@@ -52,8 +52,6 @@ const DoctorDashboard = () => {
           return 0;
         });
 
-      console.log(upcomingAppointments);
-
       setDoctor(response.data);
       setAppointments(upcomingAppointments);
       setSchedule(response.data.schedule || {});
@@ -129,7 +127,6 @@ const DoctorDashboard = () => {
         ...editAppointment,
         // date: dayjs(editAppointment.date, "DD.MM.YYYY").format("DD.MM.YYYY"),
       };
-      console.log("save:", updatedAppointment);
       await axios.put(
         `http://localhost:5000/api/doctors/${id}/appointments/${editAppointment._id}`,
         updatedAppointment
@@ -146,8 +143,6 @@ const DoctorDashboard = () => {
     const { name, value } = e.target;
     if (name === "date") {
       const formattedDate = dayjs(value).format("DD.MM.YYYY");
-      console.log("name, value :>> ", name, value);
-      console.log("frmtd:", formattedDate);
       setEditAppointment({ ...editAppointment, [name]: formattedDate });
     } else {
       setEditAppointment({ ...editAppointment, [name]: value });
@@ -155,13 +150,13 @@ const DoctorDashboard = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="">
       {doctor ? (
         <>
-          <h1 className="text-2xl font-bold mb-4">
-            Панель управления -{" "}
-            <span className="font-medium">{doctor.name}</span>
-          </h1>
+          <h2 className="flex justify-center gap-2 w-full  my-2 tablet:mb-4 py-2 pl-4 rounded-lg bg-bggray text-black text-lg font-montserrat">
+            <span>Личный кабинет</span>
+            <span className="font-medium">- {doctor.name}</span>
+          </h2>
 
           <div className="mb-4">
             <button
