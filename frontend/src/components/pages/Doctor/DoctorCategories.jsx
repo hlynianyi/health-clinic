@@ -49,7 +49,7 @@ const DoctorCategories = ({ doctors, onSelectCategory }) => {
             <div className="flex gap-1 flex-col">
               {categories[letter].map((category, index) => (
                 <button
-                  className={`text-[14px] p-1 pl-2 w-[250px] flex flex-start rounded ${
+                  className={`text-[14px] px-6 py-1 w-full flex flex-start rounded ${
                     selectedCategory === category
                       ? "bg-maingreen text-white"
                       : "hover:bg-maingreen hover:text-white"
@@ -68,7 +68,7 @@ const DoctorCategories = ({ doctors, onSelectCategory }) => {
       {selectedCategory && (
         <div className="flex justify-center mt-2 mb-0 w-full tablet:w-[50%] laptop:w-[35%] desktop:w-[30%] m-auto">
           <button
-            className="w-full bg-maingreen text-white p-2 rounded text-xs tablet:text-[15px] hover:bg-mainblue hover:scale-[95%] laptop:hover:scale-[105%]"
+            className="w-full bg-maingreen text-white p-2 rounded text-xs tablet:text-[15px] hover:bg-mainblue "
             onClick={handleShowAllDoctors}
           >
             ПОКАЗАТЬ ВСЕХ ВРАЧЕЙ

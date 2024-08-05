@@ -7,9 +7,9 @@ import {
 } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "../store/store";
-import Header from "./Navigation/Header";
+import Header from "./Navigation/NavbarCombined";
 import HomePage from "./pages/Home/Home";
-import AdminLogin from "./Admin/AdminLogin";
+import AdminLogin from "./pages/Admin/AdminLogin";
 import Dashboard from "./pages/Admin/Dashboard";
 import RegisterDoctor from "./pages/Admin/RegisterDoctor";
 import Doctors from "./pages/Doctor/Doctors";

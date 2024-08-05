@@ -150,7 +150,7 @@ const ManageServices = () => {
   };
 
   return (
-    <div className="p-6">
+    <>
       <h2 className="flex justify-center w-full my-2 tablet:mb-4 py-2 pl-4 rounded-lg bg-bggray text-black font-montserrat text-xl">
         Панель управления услугами и ценами
       </h2>
@@ -316,7 +316,7 @@ const ManageServices = () => {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 };
 

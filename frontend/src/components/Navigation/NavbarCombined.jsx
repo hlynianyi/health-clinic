@@ -66,7 +66,7 @@ const CombinedNavbar = () => {
           <img
             src={navbarLogo}
             alt="Clinic Logo"
-            className=" h-14 rounded-lg cursor-pointer"
+            className="h-12 tablet:h-14 rounded-lg cursor-pointer"
             onClick={() => navigate("/")}
           />
           <div className="hidden md:flex flex-col nowrap font-semibold font-montserrat text-maingreen"></div>
@@ -89,7 +89,7 @@ const CombinedNavbar = () => {
           <div className={` ${isSmallScreen ? "block" : "hidden"}`}>
             <IconButton onClick={handleClick}>
               <MenuIcon
-                sx={{ width: "34px", height: "34px" }}
+                sx={{ width: "30px", height: "30px" }}
                 id="basic-button"
                 aria-controls={open ? "basic-menu" : undefined}
                 aria-haspopup="true"

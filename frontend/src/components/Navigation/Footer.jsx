@@ -73,12 +73,17 @@ const Footer = () => {
           {/* work hours */}
           <div className=""></div>
         </section>
-        <section className="flex flex-col shrink-0">
-          <h2 className="text-lg tablet:mb-4">О клинике</h2>
+        <section className="flex flex-col shrink-0 gap-3">
+          <h2 className="text-lg ">О клинике</h2>
+          <div className="flex flex-col gap-2">
+            <a href="/reviews">Отзывы</a>
+            <a href="/licences">Лицензии</a>
+            <a href="/patients">Пациентам</a>
+          </div>
         </section>
       </footer>
-      <div className="p-1 tablet:px-2 border-t-2 border-graytext flex justify-between bg-bgdarkgray text-graytext ">
-        <div className="flex gap-2 items-center">
+      <div className="p-1 tablet:px-2 border-t-2 border-bgdarkgray flex justify-between bg-bgdarkgray text-graytext ">
+        <div className="flex gap-1 items-center">
           <span>Вы</span>
           <button
             onClick={() => navigate("/admin-login")}

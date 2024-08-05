@@ -1,10 +1,8 @@
 import React from "react";
 import { responsiveAbout, CustomDot } from "../../subcomponents/CarouselParts";
-import fakephoto from "../../../assets/fakephoto_building.jpg";
 import SmallAbout1 from "../../../assets/SmallAbout1.jpg";
 import SmallAbout2 from "../../../assets/SmallAbout2.jpg";
 import SmallAbout3 from "../../../assets/SmallAbout3.jpg";
-
 import CheckIcon from "@mui/icons-material/Check";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
