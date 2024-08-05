@@ -56,16 +56,16 @@ const DoctorDetails = () => {
           </h2>
           <section className="flex flex-col text-base mb-4">
             <div className="flex flex-col lg:flex-row justify-between gap-2">
-              <div className=" flex flex-col justify-center shrink-0 laptop:flex-row laptop:w-full laptop:gap-4">
-                <aside className="flex shrink-0 flex-row justify-center w-full h-min rounded-lg bg-bggray p-1 mb-2 laptop:flex-col laptop:w-1/3 tablet:gap-2">
-                  <div className="w-2/4 p-1 laptop:w-full flex justify-center">
+              <div className=" flex flex-col justify-center shrink-0 tablet:flex-row laptop:w-full laptop:gap-4">
+                <aside className="flex shrink-1 flex-row justify-center w-full h-min rounded-lg bg-bggray p-1 mb-2 tablet:flex-col tablet:w-1/3 tablet:gap-2">
+                  <div className="w-2/4 p-1 tablet:w-full flex justify-center">
                     <img
                       className="min-w-[191px] shrink-0 rounded-lg tablet:rounded-lg object-contain mix-blend-normal"
                       src={`http://localhost:5000/${doctor.photo}`}
                       alt={doctor.name}
                     />
                   </div>
-                  <section className="w-2/4 flex flex-col p-1  flex justify-start gap-2  laptop:gap-2 font-semibold text-white text-[14px] tablet:text-lg laptop:w-full">
+                  <section className="w-2/4 flex flex-col p-1  flex justify-start gap-2  laptop:gap-2 font-semibold text-white text-[14px] tablet:text-lg tablet:w-full">
                     <button
                       className="bg-maingreen hover:bg-mainblue py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                       onClick={() => navigate(`/booking/${id}`)}

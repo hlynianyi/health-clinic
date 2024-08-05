@@ -45,7 +45,7 @@ const Booking = () => {
       <section className="mb-4 grid grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3 laptop:grid-cols-3 gap-4 place-content-between">
         {doctors.map((doctor) => (
           <div
-            className="flex flex-row gap-4 mb-1 p-2 border-bggray border-[2px] rounded-lg hover:bg-bggray  ease-in-out hover:scale-95 laptop:hover:scale-105 "
+            className="flex flex-row gap-4 mb-1 p-2 border-bggray border-[2px] rounded-lg hover:bg-bggray  ease-in-out hover:scale-[98%] laptop:hover:scale-[101%] "
             key={doctor._id}
             onClick={() => navigate(`/booking/${doctor._id}`)}
           >
