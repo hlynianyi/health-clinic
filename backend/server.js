@@ -15,13 +15,28 @@ const serviceRoutes = require("./routes/serviceRoutes");
 dotenv.config();
 
 const app = express();
-app.use(cors());
+
+// new
+app.use(
+  cors({
+    origin: [""],
+    methods: ["POST", "GET", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+
+// app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+});
+
+// new
+app.get("/", (req, res) => {
+  res.json("Hello");
 });
 
 // Настройка multer для фотографий врачей
