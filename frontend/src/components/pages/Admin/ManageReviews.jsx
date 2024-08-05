@@ -19,7 +19,7 @@ const ManageReviews = () => {
 
   useEffect(() => {
     fetchReviewsData();
-  }, [fetchReviews]);
+  });
 
   const fetchReviewsData = async () => {
     try {
