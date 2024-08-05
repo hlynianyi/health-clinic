@@ -11,7 +11,7 @@ import { PhoneIcon } from "../../assets/PhoneIcon";
 const MENU = [
   { label: "Врачи", path: "/doctors" },
   { label: "Услуги", path: "/services" },
-  { label: "Диагностика", path: "/diagnostics" },
+  // { label: "Диагностика", path: "/diagnostics" },
   { label: "Акции", path: "/promotions" },
   { label: "Пациентам", path: "/patients" },
   { label: "Лицензии", path: "/license" },

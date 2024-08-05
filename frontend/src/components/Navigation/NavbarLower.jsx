@@ -37,7 +37,7 @@ const NavbarLower = () => {
   };
 
   return (
-    <div className="bg-mainblue w-full text-white">
+    <div className="bg-bgdarkgray w-full text-white">
       <div
         className={`flex ${
           isSmallScreen ? "justify-between" : "justify-center"
@@ -64,9 +64,9 @@ const NavbarLower = () => {
               key={item.label}
               onClick={() => handleNavigation(item.path)}
               sx={{
-                color: "white",
+                color: currentActiveTab === item.path ? "black" : "white",
                 backgroundColor:
-                  currentActiveTab === item.path ? "#FFA500" : "transparent",
+                  currentActiveTab === item.path ? "#FFFF" : "transparent",
                 "&:hover": {
                   backgroundColor: "#FFFF",
                   color: "#28926E",

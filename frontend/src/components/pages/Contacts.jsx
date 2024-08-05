@@ -15,9 +15,9 @@ const Contacts = () => {
       </h2>
       <section className="flex flex-col">
         <div className="flex flex-col lg:flex-row justify-between gap-4">
-          <div className="flex justify-center w-full lg:w-2/3 bg-bggray rounded-lg">
+          <div className="flex justify-center lg:w-2/3 bg-bggray rounded-lg">
             <img
-              className="object-cover p-4  rounded-lg"
+              className="object-fit rounded-lg p-4"
               src={fakephoto}
               alt="фото здания"
             />

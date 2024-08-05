@@ -32,8 +32,6 @@ import DoctorDashboard from "./pages/Doctor/DoctorDashboard";
 import DoctorLogin from "./pages/Doctor/DoctorLogin";
 import { AuthProvider } from "../context/AuthContext"; // useAuth
 
-// todo: Логин докторов(UserLogin), страница для каждого доктора с возможностью брони визита
-
 const ProtectedRoute = ({ children }) => {
   const isAuthenticated = sessionStorage.getItem("isAuthenticated") === "true";
 
@@ -50,7 +48,7 @@ const App = () => {
       <AuthProvider>
         <Router>
           <Header />
-          <main className="flex flex-col grow py-4 px-1 tablet:px-4 tablet:pt-0 tablet laptop:px-8 desktop:px-16 large:px-64 font-montserrat text-base">
+          <main className="flex flex-col grow pb-4 px-1 tablet:px-4 tablet:pt-0 tablet laptop:px-8 desktop:px-16 large:px-64 font-montserrat text-base">
             <Routes>
               <Route path="/" element={<HomePage />} />
               {/* <Route path="/login" element={<UserLogin />} /> */}
